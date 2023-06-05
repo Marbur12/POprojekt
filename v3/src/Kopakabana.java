@@ -13,14 +13,14 @@ public class Kopakabana {
     public void zglosDruzyna(Druzyna d){
         druzyny.add(d);
     }
-    public Druzyna odczytaj(int numer){
-        return druzyny.get(numer);
-    }
-    public Sedzia read(int numer){
-        return sedziowie.get(numer);
-    }
     public void wycofajDruzyne(Druzyna d){
         druzyny.remove(d);
+    }
+    public Druzyna odczytaj_druzyne(int numer){
+        return druzyny.get(numer);
+    }
+    public Sedzia odczytaj_sedzie(int numer){
+        return sedziowie.get(numer);
     }
     public void dodajMecz(Mecz m){
         mecze.add(m);

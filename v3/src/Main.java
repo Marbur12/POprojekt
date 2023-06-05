@@ -107,11 +107,11 @@ public class Main {
                 Scanner myObj = new Scanner(System.in);
                 int wybor = myObj.nextInt();
                 wybor -= 1;
-                Druzyna d1 = plaza.odczytaj(wybor);
+                Druzyna d1 = plaza.odczytaj_druzyne(wybor);
                 System.out.println("Numer drugiej druzyny:");
                 wybor = myObj.nextInt();
                 wybor -= 1;
-                Druzyna d2 = plaza.odczytaj(wybor);
+                Druzyna d2 = plaza.odczytaj_druzyne(wybor);
                 System.out.println("Wybierz numer sedziego ktory sedziowal mecz");
                 i=1;
                 for(Sedzia sedzia : plaza.sedziowie) {
@@ -120,7 +120,7 @@ public class Main {
                 }
                 wybor = myObj.nextInt();
                 wybor -= 1;
-                Sedzia s1 = plaza.read(wybor);
+                Sedzia s1 = plaza.odczytaj_sedzie(wybor);
                 System.out.println("Podaj odpowiednio wyniki");
                 System.out.println("Wynik 1:");
                 int wynik1 = myObj.nextInt();

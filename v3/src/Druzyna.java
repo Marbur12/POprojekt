@@ -2,12 +2,16 @@ import java.util.ArrayList;
 
 public class Druzyna {
     private String nazwa;
+    private ArrayList<Gracz> zawodnicy = new ArrayList<Gracz>();
+    private int zwyciestwa = 0;
     Druzyna(String n){
         nazwa = n;
     }
-    private int zwyciestwa = 0;
-    Druzyna(Druzyna d){nazwa=d.nazwa;}
-    private ArrayList<Gracz> zawodnicy = new ArrayList<Gracz>();
+    Druzyna(Druzyna d){
+        nazwa=d.nazwa;
+        zwyciestwa= d.zwyciestwa;
+        zawodnicy.addAll(d.zawodnicy);
+    }
     public void modNazwa(String n){
         nazwa = n;
     }

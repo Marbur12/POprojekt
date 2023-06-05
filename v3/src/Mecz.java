@@ -1,4 +1,4 @@
-public class Mecz {
+abstract class Mecz {
     protected Sedzia sedzia;
     protected Druzyna druzyna0, druzyna1;
     protected int zwyciezca;
@@ -9,6 +9,7 @@ public class Mecz {
         druzyna1=new Druzyna(d1);
     }
     public void wynik(int wynik1, int wynik2){
+        czyRozegrany=true;
         if(wynik1>wynik2){
             druzyna0.wygrana();
         }
