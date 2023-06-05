@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.*;
 
 
+
 public class Main {
     /*funkcja odpowiada za wyswietlenie zarzadzania konkretnymi listami, case1 to zarzadzanie druzynami, case2 sedziami itp
     na podstawie wczesniej podanej liczby
@@ -207,7 +208,21 @@ public class Main {
             else if (plaza1.mecze.get(i) instanceof PrzeciaganieLiny)
                 typMeczu="PrzeciaganieLiny";
             System.out.println(i+". Mecz:"+typMeczu+" "+plaza1.mecze.get(i).druzyna0+" vs "+plaza1.mecze.get(i).druzyna1);
+            plaza1.mecze.get(i).wynik(0,1, new Sedzia("Adam","Czyż"));
         }
+        for (int i=0; i<plaza1.druzyny.size(); i++){
+            System.out.println(plaza1.druzyny.get(i)+"Liczba wygranych: "+plaza1.druzyny.get(i).getZwyciestwa());
+        }
+        plaza1.druzyny.sort(new Comparator<Druzyna>() {
+            @Override
+            public int compare(Druzyna o1, Druzyna o2) {
+                return o2.getZwyciestwa()-o1.getZwyciestwa();
+            }
+        });
+        for (int i=0; i<plaza1.druzyny.size(); i++){
+            System.out.println(plaza1.druzyny.get(i)+"Liczba wygranych: "+plaza1.druzyny.get(i).getZwyciestwa());
+        }
+
         //end test
         //concluding działa zostawiam gdyby moduł przydał się na przyszłość
 

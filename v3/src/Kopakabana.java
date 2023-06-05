@@ -10,6 +10,7 @@ public class Kopakabana {
     public void usunSedziego(Sedzia s){
         sedziowie.remove(s);
     }
+
     public void zglosDruzyna(Druzyna d){
         druzyny.add(d);
     }

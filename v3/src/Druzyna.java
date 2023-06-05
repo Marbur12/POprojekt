@@ -16,7 +16,7 @@ public class Druzyna {
         nazwa = n;
     }
     public void wygrana(){
-        zwyciestwa += 1;
+        zwyciestwa=zwyciestwa+1;
     }
     public void DodajGracza(Gracz z){
         zawodnicy.add(z);
@@ -27,6 +27,7 @@ public class Druzyna {
     public ArrayList<Gracz> getGracze(){
         return zawodnicy;
     }
+    public int getZwyciestwa(){return zwyciestwa;}
 
     @Override
     public String toString() {
