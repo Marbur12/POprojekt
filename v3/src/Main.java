@@ -4,7 +4,10 @@ import java.util.*;
 
 
 public class Main {
-
+    /*funkcja odpowiada za wyswietlenie zarzadzania konkretnymi listami, case1 to zarzadzanie druzynami, case2 sedziami itp
+    na podstawie wczesniej podanej liczby
+    uwzglednilem rowniez wypisywanie druzyn, sedziow aby mozna bylo latwiej podjac decyzje o dodaniu ew usunieciu
+    */
     static void wyborGlowny(int chose, Kopakabana plaza){
         int i;
         switch (chose){
@@ -52,9 +55,11 @@ public class Main {
                 System.out.println("1.Dwoch ogni");
                 System.out.println("2.Mecz siatkowki");
                 System.out.println("3.Przeciaganie liny");
-                //no to ten
+                //tutaj powinna byc funkcja odpowiadajaca za stworzenie jednego z trzech meczy
         }
     }
+    //funkcja NazwaDruzyny skraca kod, zrobilem ja po to aby nie pisac tego kodu za kazdym razem
+    //kiedy chcemy zglosic, usunac druzyne itp
     static Druzyna NazwaDruzyny(Kopakabana plaza){
         System.out.println("Podaj nazwe druzyny!");
         Scanner myObj = new Scanner(System.in);
@@ -62,7 +67,7 @@ public class Main {
         Druzyna d = new Druzyna(nazwa_druzyny);
         return d;
     }
-
+    //analogicznie zrobilem z NazwaSedziego jak i NazwaSedziegoPom
     static Sedzia NazwaSedziego(Kopakabana plaza){
         System.out.println("Podaj imie sedziego");
         Scanner myObj = new Scanner(System.in);
@@ -81,7 +86,14 @@ public class Main {
         Sedzia_pomocniczy sedzia = new Sedzia_pomocniczy(imie, nazwisko);
         return sedzia;
     }
-
+    /*co do funkcji wyborMeczu, wlasnie nie wiem co z nia zrobic, ogolnie problem polega na tym
+    * ze jest to dosc duzy blok kodu, ktory ma za zadanie zebrac dane potrzebne do stworzenia meczu
+    * typu nazwy druzyn ktore beda grac, nazwiska sedziow, wynik itp, problem polega na tym ze
+    * zeby zorganizowac to w funkcji musielibysmy zwrocic kilka roznych obiektow etc (nie wiem czy
+    * rzutowanie w gore lub dol to rozwiaze, bo srednio to umiem) do tego dochodzi problem z sedziami
+    * pomocniczymi ktorzy wystepuja w klasie meczu siatkowki, imo mozna jedynie ukrocic ten caly jebitny
+    * blok, chyba ze ty masz jakis pomysl na zabawe z tymi funkcjami
+    * */
     static void wyborMeczu(int chose, Kopakabana plaza){
         switch(chose){
             case 1:
@@ -116,7 +128,12 @@ public class Main {
                 int wynik2 = myObj.nextInt();
                 Mecz2ogni mecz2ogni = new Mecz2ogni(d1, d2, s1);
                 mecz2ogni.wynik(wynik1,wynik2);
+                //jak widzisz duzo kodu sie powtarza, ogolnie zasada prosta, wypisuje na ekran
+                //wszystkie druzyny, po czym pyta o numer druzyny ktora ma rozegrac mecz,
+                //podobnie robi z sedziami a pozniej leca wyniki
                 break;
+                //tutaj na dole powinien byc przypadek dotyczacy innnych rodzajow meczu ale no
+                //jak wspomnialem wczesniej, nie mam pomyslu
             case 2:
                 break;
             case 3:
@@ -125,7 +142,8 @@ public class Main {
                 break;
         }
     }
-
+    //funkcja wyborDruzyna odpowiada, za zgloszenie lub wycofanie druzyny, przy czym wykorzystalem
+    //wczesniej opisana funkcje nazwaDruzyny aby skrocic kod
     static void wyborDruzyna(int chose, Kopakabana plaza){
         switch(chose){
             case 1:
@@ -140,7 +158,8 @@ public class Main {
                 break;
         }
     }
-
+    //funkcja wyborSedzia odpowiada za dodanie lub usuniecie sedziego, przy czym wykorzystalem
+    //wczesniej opisana funkcje nazwaSedziego aby skrocic kod
     static void wyborSedzia(int chose, Kopakabana plaza){
         switch(chose){
             case 1:
@@ -181,6 +200,7 @@ public class Main {
             int wybor_uzytkownika = myObj.nextInt();
             wybor = wybor_uzytkownika;
             wyborGlowny(wybor, plaza);
+            //funkcja wybor glowny decyduje czy bedziemy zarzadzac druzynami, sedziami czy inne opcje
         }
     }
 }
