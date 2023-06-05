@@ -28,5 +28,18 @@ public class Kopakabana {
     public void usunMecz(Mecz m){
         mecze.remove(m);
     }
-    public void generujMecze(){} //cos trzeba
+    public void generujMecze(){
+        //generuje mecze z wszystkimi druzynami
+        //returnuje ci liste wszytskich meczy
+        //w menu pózniej proszisz o wyniki
+        int size=druzyny.size();
+        for(int i=0; i<size-1; i++) {
+            for (int j = i+1; j < size; j++) {
+                mecze.add(new Mecz2ogni(druzyny.get(i), druzyny.get(j)));
+                mecze.add(new MeczSiatkowki(druzyny.get(i), druzyny.get(j)));
+                mecze.add(new PrzeciaganieLiny(druzyny.get(i), druzyny.get(j)));
+            }
+        }
+    } //cos trzeba
+    public void generujPolfinaly(){} //cos trzeba
 }

@@ -3,12 +3,12 @@ abstract class Mecz {
     protected Druzyna druzyna0, druzyna1;
     protected int zwyciezca;
     protected boolean czyRozegrany;
-    Mecz(Druzyna d0, Druzyna d1, Sedzia s){
-        sedzia=new Sedzia(s.imie, s.nazwisko);
+    Mecz(Druzyna d0, Druzyna d1){
         druzyna0=new Druzyna(d0);
         druzyna1=new Druzyna(d1);
     }
-    public void wynik(int wynik1, int wynik2){
+    public void wynik(int wynik1, int wynik2, Sedzia s){
+        sedzia=new Sedzia(s.imie, s.nazwisko);
         czyRozegrany=true;
         if(wynik1>wynik2){
             druzyna0.wygrana();

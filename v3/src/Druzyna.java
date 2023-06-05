@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Druzyna {
     private String nazwa;
-    private ArrayList<Gracz> zawodnicy = new ArrayList<Gracz>();
+    private final ArrayList<Gracz> zawodnicy = new ArrayList<Gracz>();
     private int zwyciestwa = 0;
     Druzyna(String n){
         nazwa = n;
@@ -26,5 +26,10 @@ public class Druzyna {
     }
     public ArrayList<Gracz> getGracze(){
         return zawodnicy;
+    }
+
+    @Override
+    public String toString() {
+        return nazwa;
     }
 }

@@ -36,15 +36,16 @@ public class Main {
                     System.out.println(i + "." + sedzia);
                     i++;
                 }
-                System.out.println("Wybierz co chcesz zrobic");
-                System.out.println("1.Dodaj sedziego");
-                System.out.println("2.Dodaj sedziego pomocniczego");
-                System.out.println("3.Usun sedziego");
-                System.out.println("4.Usun sedziego pomocniczego");
-                System.out.println("5-powrot");
+
                 myObj = new Scanner(System.in);
                 wybor_uzytkownika = myObj.nextInt();
                 do{
+                    System.out.println("Wybierz co chcesz zrobic");
+                    System.out.println("1.Dodaj sedziego");
+                    System.out.println("2.Dodaj sedziego pomocniczego");
+                    System.out.println("3.Usun sedziego");
+                    System.out.println("4.Usun sedziego pomocniczego");
+                    System.out.println("5-powrot");
                     wyborSedzia(wybor_uzytkownika, plaza);
                     wybor_uzytkownika = myObj.nextInt();
                 }while(wybor_uzytkownika!=5);
@@ -64,8 +65,7 @@ public class Main {
         System.out.println("Podaj nazwe druzyny!");
         Scanner myObj = new Scanner(System.in);
         String nazwa_druzyny = myObj.nextLine();
-        Druzyna d = new Druzyna(nazwa_druzyny);
-        return d;
+        return new Druzyna(nazwa_druzyny);
     }
     //analogicznie zrobilem z NazwaSedziego jak i NazwaSedziegoPom
     static Sedzia NazwaSedziego(Kopakabana plaza){
@@ -74,8 +74,7 @@ public class Main {
         String imie = myObj.nextLine();
         System.out.println("Podaj nazwisko sedziego");
         String nazwisko = myObj.nextLine();
-        Sedzia sedzia = new Sedzia(imie, nazwisko);
-        return sedzia;
+        return new Sedzia(imie, nazwisko);
     }
     static Sedzia_pomocniczy NazwaSedziegoPom(Kopakabana plaza){
         System.out.println("Podaj imie sedziego pomocniczego");
@@ -126,8 +125,8 @@ public class Main {
                 int wynik1 = myObj.nextInt();
                 System.out.println("Wynik 2:");
                 int wynik2 = myObj.nextInt();
-                Mecz2ogni mecz2ogni = new Mecz2ogni(d1, d2, s1);
-                mecz2ogni.wynik(wynik1,wynik2);
+                Mecz2ogni mecz2ogni = new Mecz2ogni(d1, d2);
+                mecz2ogni.wynik(wynik1, wynik2, s1);
                 //jak widzisz duzo kodu sie powtarza, ogolnie zasada prosta, wypisuje na ekran
                 //wszystkie druzyny, po czym pyta o numer druzyny ktora ma rozegrac mecz,
                 //podobnie robi z sedziami a pozniej leca wyniki
@@ -183,22 +182,43 @@ public class Main {
                 break;
         }
     }
-
+    static void wypiszMenu(){
+        System.out.println("Co chcesz zrobic?");
+        System.out.println("1-Zarządzaj drużynami");
+        System.out.println("2-Zarządzaj sędziami");
+        System.out.println("3-Organizuj rozgrywki");
+        System.out.println("4-Wyświetl tabele wynikow");
+    }
 
     public static void main(String[] args) {
+        Kopakabana plaza1 = new Kopakabana();
+        //test site
+        plaza1.zglosDruzyna(new Druzyna("Chuje"));
+        plaza1.zglosDruzyna(new Druzyna("Debile"));
+        plaza1.zglosDruzyna(new Druzyna("Cioty"));
+        plaza1.zglosDruzyna(new Druzyna("Farfocle"));
+        plaza1.generujMecze();
+        for (int i=0; i<plaza1.mecze.size(); i++){
+            String typMeczu = "";
+            if (plaza1.mecze.get(i) instanceof Mecz2ogni)
+                typMeczu="Mecz2ogni       ";
+            else if (plaza1.mecze.get(i) instanceof MeczSiatkowki)
+                typMeczu="MeczSiatkowki   ";
+            else if (plaza1.mecze.get(i) instanceof PrzeciaganieLiny)
+                typMeczu="PrzeciaganieLiny";
+            System.out.println(i+". Mecz:"+typMeczu+" "+plaza1.mecze.get(i).druzyna0+" vs "+plaza1.mecze.get(i).druzyna1);
+        }
+        //end test
+        //concluding działa zostawiam gdyby moduł przydał się na przyszłość
+
+        System.out.println("Witaj w zawodach plaży Kopakabana!");
         int wybor=0;
+        Scanner myObj = new Scanner(System.in);
         String nazwa_druzyny, imie, nazwisko;
         Kopakabana plaza = new Kopakabana();
         while(wybor!=5) {
-            Scanner myObj = new Scanner(System.in);
-            System.out.println("Witaj w zawodach plaży Kopakabana!");
-            System.out.println("Co chcesz zrobic?");
-            System.out.println("1-Zarządzaj drużynami");
-            System.out.println("2-Zarządzaj sędziami");
-            System.out.println("3-Organizuj rozgrywki");
-            System.out.println("4-Wyświetl tabele wynikow");
-            int wybor_uzytkownika = myObj.nextInt();
-            wybor = wybor_uzytkownika;
+            wypiszMenu();
+            wybor = myObj.nextInt();
             wyborGlowny(wybor, plaza);
             //funkcja wybor glowny decyduje czy bedziemy zarzadzac druzynami, sedziami czy inne opcje
         }
