@@ -224,7 +224,7 @@ public class Main {
                 typMeczu="MeczSiatkowki   ";
             else if (plaza1.getMeczePolfinaly().get(i) instanceof PrzeciaganieLiny)
                 typMeczu="PrzeciaganieLiny";
-            System.out.println(i+". Mecz:"+typMeczu+" "+plaza1.mecze.get(i).druzyna0+" vs "+plaza1.mecze.get(i).druzyna1);
+            System.out.println(i+". Mecz:"+typMeczu+" "+plaza1.getMeczePolfinaly().get(i).druzyna0+" vs "+plaza1.getMeczePolfinaly().get(i).druzyna1);
         }
 
         //end test
