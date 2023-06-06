@@ -28,6 +28,7 @@ public class Druzyna {
         return zawodnicy;
     }
     public int getZwyciestwa(){return zwyciestwa;}
+    public void setZwyciestwa(int i){zwyciestwa=i;}
 
     @Override
     public String toString() {

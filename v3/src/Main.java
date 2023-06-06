@@ -194,6 +194,7 @@ public class Main {
     public static void main(String[] args) {
         Kopakabana plaza1 = new Kopakabana();
         //test site
+        plaza1.zglosDruzyna(new Druzyna("Patrysie"));
         plaza1.zglosDruzyna(new Druzyna("Chuje"));
         plaza1.zglosDruzyna(new Druzyna("Debile"));
         plaza1.zglosDruzyna(new Druzyna("Cioty"));
@@ -213,14 +214,17 @@ public class Main {
         for (int i=0; i<plaza1.druzyny.size(); i++){
             System.out.println(plaza1.druzyny.get(i)+"Liczba wygranych: "+plaza1.druzyny.get(i).getZwyciestwa());
         }
-        plaza1.druzyny.sort(new Comparator<Druzyna>() {
-            @Override
-            public int compare(Druzyna o1, Druzyna o2) {
-                return o2.getZwyciestwa()-o1.getZwyciestwa();
-            }
-        });
-        for (int i=0; i<plaza1.druzyny.size(); i++){
-            System.out.println(plaza1.druzyny.get(i)+"Liczba wygranych: "+plaza1.druzyny.get(i).getZwyciestwa());
+        plaza1.generujPolfinaly();
+        System.out.println("Polfinaly!!!!!!");
+        for (int i=0; i<plaza1.getMeczePolfinaly().size(); i++){
+            String typMeczu = "";
+            if (plaza1.getMeczePolfinaly().get(i) instanceof Mecz2ogni)
+                typMeczu="Mecz2ogni       ";
+            else if (plaza1.getMeczePolfinaly().get(i) instanceof MeczSiatkowki)
+                typMeczu="MeczSiatkowki   ";
+            else if (plaza1.getMeczePolfinaly().get(i) instanceof PrzeciaganieLiny)
+                typMeczu="PrzeciaganieLiny";
+            System.out.println(i+". Mecz:"+typMeczu+" "+plaza1.mecze.get(i).druzyna0+" vs "+plaza1.mecze.get(i).druzyna1);
         }
 
         //end test
