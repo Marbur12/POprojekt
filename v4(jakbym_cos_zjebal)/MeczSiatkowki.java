@@ -5,6 +5,7 @@ public final class MeczSiatkowki extends Mecz{
     MeczSiatkowki(Druzyna d0, Druzyna d1){
         super(d0,d1);
     }
+    /*
     public void wynik(int wynik1, int wynik2, Sedzia s, Sedzia_pomocniczy p1, Sedzia_pomocniczy p2){
         sedzia=new Sedzia(s);
         pom1=new Sedzia_pomocniczy(pom1);
@@ -19,7 +20,8 @@ public final class MeczSiatkowki extends Mecz{
         if(wynik1==wynik2){
             System.out.println("Mecz zakonczyl sie remisem!");
         }
-    }
+    }*/
+    //gopnik: imo mozna wyjebac te funkcje? pewnie jeszcze tutaj rzeczy mozna zmienic
     public void modSedziPomocniczych(Sedzia_pomocniczy s1, Sedzia_pomocniczy s2){
         pom1 = s1;
         pom2 = s2;
