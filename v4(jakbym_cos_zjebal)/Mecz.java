@@ -10,6 +10,7 @@ abstract class Mecz {
         druzyna1=d1;
     }
     public void wynik(){
+        try{
         System.out.println("Prosze podaj wyniki: (jesli byl remis, podaj wyniki dogrywki)\nWynik 1:");
         Scanner myObj = new Scanner(System.in);
         int wynik1 = myObj.nextInt();
