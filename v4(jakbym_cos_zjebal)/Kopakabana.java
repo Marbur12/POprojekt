@@ -119,6 +119,8 @@ public class Kopakabana {
                     mecze.get(i).sedzia = sedziowie.get(getRandomNumber(0, sedziowie.size()));
                     if (mecze.get(i) instanceof MeczSiatkowki) {
                         //mecze.get(i)
+                        //O TU O TRZEBA COS POMYSLEC!!!!!!
+                        //-------------------------------------------------------------------------------------------------------------------------------------------------------
                     }
                     i++;
                 }
