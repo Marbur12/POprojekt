@@ -3,13 +3,6 @@ import java.util.Scanner;
 import java.util.*;
 import java.util.InputMismatchException;
 
-//gopnik: dodana exception klasa
-class ZlaObsluga extends Exception{
-    public ZlaObsluga(String s){
-        super(s);
-    }
-}
-
 public class Main {
     /*funkcja odpowiada za wyswietlenie zarzadzania konkretnymi listami, case1 to zarzadzanie druzynami, case2 sedziami itp
     na podstawie wczesniej podanej liczby
@@ -85,7 +78,6 @@ public class Main {
                 break;
         }
         }
-    }
     //funkcja NazwaDruzyny skraca kod, zrobilem ja po to aby nie pisac tego kodu za kazdym razem
     //kiedy chcemy zglosic, usunac druzyne itp
     static Druzyna NazwaDruzyny(Kopakabana plaza){
@@ -109,8 +101,7 @@ public class Main {
         String imie = myObj.nextLine();
         System.out.println("Podaj nazwisko sedziego pomocniczego");
         String nazwisko = myObj.nextLine();
-        Sedzia_pomocniczy sedzia = new Sedzia_pomocniczy(imie, nazwisko);
-        return sedzia;
+        return new Sedzia_pomocniczy(imie, nazwisko);
     }
     /*co do funkcji wyborMeczu, wlasnie nie wiem co z nia zrobic, ogolnie problem polega na tym
     * ze jest to dosc duzy blok kodu, ktory ma za zadanie zebrac dane potrzebne do stworzenia meczu
@@ -164,7 +155,7 @@ public class Main {
             default:
                 break;
         }
-         wypiszopcjeSedziego()
+         wypiszopcjeSedziego();
     }
     static void wyborMecze(int chose, Kopakabana plaza1){
         switch(chose){

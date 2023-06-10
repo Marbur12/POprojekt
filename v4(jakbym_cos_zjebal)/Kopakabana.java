@@ -3,21 +3,6 @@ import java.util.Comparator;
 import java.util.Random;
 
 //gopnik: tego oto uzylem do zrobienia posortowanej tablicy wedllug wynikow
-class porownanieWynikow implements Comparator<Druzyna>{
-    @Override
-    public int compare(Druzyna d1, Druzyna d2){
-        int d1wynik = d1.getZwyciestwa();
-        int d2wynik = d1.getZwyciestwa();
-
-        if(d1wynik>d2wynik){
-            return 1;
-        }else if (d1wynik<d2wynik){
-            return -1;
-        }else{
-            return 0;
-        }
-    }
-}
 
 public class Kopakabana {
     private ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
@@ -32,7 +17,7 @@ public class Kopakabana {
     }
     //wspomniane sortowanie
     public void sortowanie(){
-        Collections.sort(druzyny, new porownanieWynikow());
+        druzyny.sort(new porownanieWynikow());
         for(Druzyna druzyna : druzyny){
             System.out.println(druzyna.toString()+":"+druzyna.getZwyciestwa());
         }
