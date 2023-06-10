@@ -2,12 +2,41 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
+//gopnik: tego oto uzylem do zrobienia posortowanej tablicy wedllug wynikow
+class porownanieWynikow implements Comparator<Druzyna>{
+    @Override
+    public int compare(Druzyna d1, Druzyna d2){
+        int d1wynik = d1.getZwyciestwa();
+        int d2wynik = d1.getZwyciestwa();
+
+        if(d1wynik>d2wynik){
+            return 1;
+        }else if (d1wynik<d2wynik){
+            return -1;
+        }else{
+            return 0;
+        }
+    }
+}
+
 public class Kopakabana {
     private ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
     private ArrayList<Mecz> mecze = new ArrayList<Mecz>();
     private ArrayList<Druzyna> druzyny = new ArrayList<Druzyna>();
     private ArrayList<Mecz> meczePolfinaly = new ArrayList<Mecz>();
     private ArrayList<Mecz> meczeFinaly = new ArrayList<Mecz>();
+    
+    //gopnik: szybkie random number do generowania sedziow
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+    //wspomniane sortowanie
+    public void sortowanie(){
+        Collections.sort(druzyny, new porownanieWynikow());
+        for(Druzyna druzyna : druzyny){
+            System.out.println(druzyna.getNazwa()+":"+druzyna.getZwyciestwa());
+        }
+    }
     public void dodajSedziego(Sedzia s){
         sedziowie.add(s);
     }
@@ -29,6 +58,10 @@ public class Kopakabana {
     public Druzyna zwrocDruzyne(int i){
         return druzyny.get(i);
     }
+    public int rozmiarSedziow(){
+        return sedziowie.size();
+    }
+    //gopnik: bylo mi potrzebne
     public void wypiszSedziow(){
         int i=1;
         for(Sedzia sedzia : sedziowie){
@@ -61,6 +94,7 @@ public class Kopakabana {
     public void usunMecz(Mecz m){
         mecze.remove(m);
     }
+    //gopnik: imo mozna niektore z tych szarakow wyjebac
     public ArrayList<Mecz> getMeczePolfinaly(){return meczePolfinaly;}
     public void generujMecze(){
         //generuje mecze z wszystkimi druzynami
@@ -74,6 +108,24 @@ public class Kopakabana {
                 mecze.add(new PrzeciaganieLiny(druzyny.get(i), druzyny.get(j)));
             }
         }
+        //gopnik: tutaj widac w miare obsluge bledu oraz losowanie sedziow do meczy
+        //tzw mechanizm antykorupcyjny (komputer sam decyduje kto co i jak sedziuje a nie jakies ustawki)
+            try {
+                if (sedziowie.size() < 1) {
+                    throw new ZlaObsluga("za malo sedziow!");
+                }
+                int i = 0;
+                while (i < mecze.size() - 1) {
+                    mecze.get(i).sedzia = sedziowie.get(getRandomNumber(0, sedziowie.size()));
+                    if (mecze.get(i) instanceof MeczSiatkowki) {
+                        //mecze.get(i)
+                    }
+                    i++;
+                }
+            } catch (ZlaObsluga z) {
+                System.out.println(z.getMessage());
+                System.exit(1);
+            }
     } //cos trzeba
 
     public void generujPolfinaly(){
