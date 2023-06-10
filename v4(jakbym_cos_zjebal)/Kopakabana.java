@@ -34,7 +34,7 @@ public class Kopakabana {
     public void sortowanie(){
         Collections.sort(druzyny, new porownanieWynikow());
         for(Druzyna druzyna : druzyny){
-            System.out.println(druzyna.getNazwa()+":"+druzyna.getZwyciestwa());
+            System.out.println(druzyna.toString()+":"+druzyna.getZwyciestwa());
         }
     }
     public void dodajSedziego(Sedzia s){
