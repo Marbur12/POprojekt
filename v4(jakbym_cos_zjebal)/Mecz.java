@@ -1,4 +1,11 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
+
+class wynikException extends RuntimeException{
+    private int wynik;
+    public wynikException(){}
+    public wynikException(String wiadomosc, int w){super(wiadomosc);wynik=w;}
+}
 
 abstract class Mecz {
     protected Sedzia sedzia;
