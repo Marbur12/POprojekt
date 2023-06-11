@@ -8,6 +8,8 @@ public class Kopakabana {
     private ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
     private ArrayList<Mecz> mecze = new ArrayList<Mecz>();
     private ArrayList<Druzyna> druzyny = new ArrayList<Druzyna>();
+    private ArrayList<Druzyna> druzynyPolfinaly = new ArrayList<Druzyna>();
+    private ArrayList<Druzyna> druzynyFinaly = new ArrayList<Druzyna>();
     private ArrayList<Mecz> meczePolfinaly = new ArrayList<Mecz>();
     private ArrayList<Mecz> meczeFinaly = new ArrayList<Mecz>();
     
@@ -159,15 +161,32 @@ public class Kopakabana {
             }
             top=nowytop;
         }
-        for (Druzyna druzyna : top) {
-            druzyna.setZwyciestwa(0);
+        for (int i=0;i<top.size();i++) {
+            druzynyPolfinaly.add(new Druzyna(top.get(i)));
+            druzynyPolfinaly.get(i).setZwyciestwa(0);
         }
         for (int i=0; i<2; i++){
-            meczePolfinaly.add(new Mecz2ogni(top.get(i), top.get(3-i)));
-            meczePolfinaly.add(new PrzeciaganieLiny(top.get(i), top.get(3-i)));
-            meczePolfinaly.add(new MeczSiatkowki(top.get(i), top.get(3-i)));
+            meczePolfinaly.add(new Mecz2ogni(druzynyPolfinaly.get(i), druzynyPolfinaly.get(3-i)));
+            meczePolfinaly.add(new PrzeciaganieLiny(druzynyPolfinaly.get(i), druzynyPolfinaly.get(3-i)));
+            meczePolfinaly.add(new MeczSiatkowki(druzynyPolfinaly.get(i), druzynyPolfinaly.get(3-i)));
         }
+    }
 
-
-    } //dont work ¯\_(ツ)_/¯
+    public void generujFinaly() {
+        druzynyPolfinaly.sort(new Comparator<Druzyna>() {
+            @Override
+            public int compare(Druzyna o1, Druzyna o2) {
+                return o2.getZwyciestwa() - o1.getZwyciestwa();
+            }
+        });
+        for (int i=0;i<2;i++) {
+            druzynyFinaly.add(new Druzyna(druzynyPolfinaly.get(i)));
+            druzynyFinaly.get(i).setZwyciestwa(0);
+        }
+        for (int i=0; i<2; i++){
+            meczeFinaly.add(new Mecz2ogni(druzynyFinaly.get(i), druzynyFinaly.get(3-i)));
+            meczeFinaly.add(new PrzeciaganieLiny(druzynyFinaly.get(i), druzynyFinaly.get(3-i)));
+            meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(i), druzynyFinaly.get(3-i)));
+        }
+    }
 }
