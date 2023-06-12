@@ -6,6 +6,8 @@ import java.util.Random;
 
 public class Kopakabana {
     private ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
+    private ArrayList<Sedzia_pomocniczy> pomocniczy = new ArrayList<Sedzia_pomocniczy>();
+    //gopnik: dodatkowa lista sedziow pomocniczych jesli dziala to pomaga
     private ArrayList<Mecz> mecze = new ArrayList<Mecz>();
     private ArrayList<Druzyna> druzyny = new ArrayList<Druzyna>();
     private ArrayList<Druzyna> druzynyPolfinaly = new ArrayList<Druzyna>();
@@ -28,9 +30,25 @@ public class Kopakabana {
         sedziowie.add(s);
     }
     public void usunSedziego(Sedzia s){
-        sedziowie.remove(s);
+        if(sedziowie.contains(s)) {
+            sedziowie.remove(s);
+        }else{
+            System.out.println("Nie ma takiego sedziego!");
+        }
     }
-
+    //dodalem do usunSedziego warunek sprawdzajacy czy jest taki sedzia w ogole
+    //na moje mily bajer
+    public void dodajSedziegoPomocniczego(Sedzia_pomocniczy s){
+        pomocniczy.add(s);
+    }
+    public void usunSedziegoPomocniczego(Sedzia_pomocniczy s){
+        if(pomocniczy.contains(s)) {
+            pomocniczy.remove(s);
+        }else{
+            System.out.println("Nie ma takiego sedziego!");
+        }
+    }
+    //specjalnie pod liste sedziow pomocniczych
     //od tego momentu do nastepnego komentarza oznaczam funkcje ktore na moje rozwiazuja problem pol private/public
     public void wypiszDruzyny(){
         int i=1;
@@ -56,6 +74,10 @@ public class Kopakabana {
             i++;
         }
     }
+    public int rozmiarPolfinaly(){return meczePolfinaly.size();}
+    //sluzy do tego aby sprawdzic czy byly juz rozegrane polfinaly
+    public int rozmiarFinaly(){return meczeFinaly.size();}
+    //zaraz wykorzystam ten rozmiar finalow, bo dosc niedawno dodane
     public int rozmiarMeczy(){
         return mecze.size();
     }
@@ -67,7 +89,11 @@ public class Kopakabana {
         druzyny.add(d);
     }
     public void wycofajDruzyne(Druzyna d){
-        druzyny.remove(d);
+        if(druzyny.contains(d)) {
+            druzyny.remove(d);
+        }else{
+            System.out.println("Nie ma takiej druzyny!");
+        }
     }
     public Druzyna odczytaj_druzyne(int numer){
         return druzyny.get(numer);
@@ -87,34 +113,31 @@ public class Kopakabana {
         //generuje mecze z wszystkimi druzynami
         //returnuje ci liste wszytskich meczy
         //w menu pózniej proszisz o wyniki
-        int size=druzyny.size();
-        for(int i=0; i<size-1; i++) {
-            for (int j = i+1; j < size; j++) {
-                mecze.add(new Mecz2ogni(druzyny.get(i), druzyny.get(j)));
-                mecze.add(new MeczSiatkowki(druzyny.get(i), druzyny.get(j)));
-                mecze.add(new PrzeciaganieLiny(druzyny.get(i), druzyny.get(j)));
-            }
-        }
-        //gopnik: tutaj widac w miare obsluge bledu oraz losowanie sedziow do meczy
-        //tzw mechanizm antykorupcyjny (komputer sam decyduje kto co i jak sedziuje a nie jakies ustawki)
+        int size = druzyny.size();
             try {
-                if (sedziowie.size() < 1) {
+                if (sedziowie.size() < 1 || pomocniczy.size() < 2) {
                     throw new ZlaObsluga("za malo sedziow!");
                 }
-                int i = 0;
-                while (i < mecze.size() - 1) {
-                    mecze.get(i).sedzia = sedziowie.get(getRandomNumber(0, sedziowie.size()));
-                    if (mecze.get(i) instanceof MeczSiatkowki) {
-                        //mecze.get(i)
-                        //O TU O TRZEBA COS POMYSLEC!!!!!!
-                        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+                //troche sporo tych randow ale no, prowizorka
+                int rand1, rand2, rand3, rand4, rand5;
+                for (int i = 0; i < size - 1; i++) {
+                    for (int j = i + 1; j < size; j++) {
+                        rand1 = getRandomNumber(0, pomocniczy.size() - 1);
+                        rand2 = getRandomNumber(0, pomocniczy.size() - 1);
+                        rand3 = getRandomNumber(0, sedziowie.size() - 1);
+                        rand4 = getRandomNumber(0, sedziowie.size() - 1);
+                        rand5 = getRandomNumber(0, sedziowie.size() - 1);
+                        mecze.add(new Mecz2ogni(druzyny.get(i), druzyny.get(j), sedziowie.get(rand3)));
+                        mecze.add(new MeczSiatkowki(druzyny.get(i), druzyny.get(j), sedziowie.get(rand4), pomocniczy.get(rand1), pomocniczy.get(rand2)));
+                        mecze.add(new PrzeciaganieLiny(druzyny.get(i), druzyny.get(j), sedziowie.get(rand5)));
                     }
-                    i++;
                 }
             } catch (ZlaObsluga z) {
                 System.out.println(z.getMessage());
                 System.exit(1);
             }
+            
+
     } //cos trzeba
 
     public void generujPolfinaly(){
@@ -165,10 +188,24 @@ public class Kopakabana {
             druzynyPolfinaly.add(new Druzyna(top.get(i)));
             druzynyPolfinaly.get(i).setZwyciestwa(0);
         }
-        for (int i=0; i<2; i++){
-            meczePolfinaly.add(new Mecz2ogni(druzynyPolfinaly.get(i), druzynyPolfinaly.get(3-i)));
-            meczePolfinaly.add(new PrzeciaganieLiny(druzynyPolfinaly.get(i), druzynyPolfinaly.get(3-i)));
-            meczePolfinaly.add(new MeczSiatkowki(druzynyPolfinaly.get(i), druzynyPolfinaly.get(3-i)));
+        try {
+            if (sedziowie.size() < 1 || pomocniczy.size() < 2) {
+                throw new ZlaObsluga("za malo sedziow!");
+            }
+            int rand1, rand2, rand3, rand4, rand5;
+            for (int i = 0; i < 2; i++) {
+                rand1 = getRandomNumber(0, pomocniczy.size() - 1);
+                rand2 = getRandomNumber(0, pomocniczy.size() - 1);
+                rand3 = getRandomNumber(0, sedziowie.size() - 1);
+                rand4 = getRandomNumber(0, sedziowie.size() - 1);
+                rand5 = getRandomNumber(0, sedziowie.size() - 1);
+                meczePolfinaly.add(new Mecz2ogni(top.get(i), top.get(3 - i), sedziowie.get(rand3)));
+                meczePolfinaly.add(new PrzeciaganieLiny(top.get(i), top.get(3 - i), sedziowie.get(rand4)));
+                meczePolfinaly.add(new MeczSiatkowki(top.get(i), top.get(3 - i), sedziowie.get(rand5), pomocniczy.get(rand1), pomocniczy.get(rand2)));
+            }
+        } catch (ZlaObsluga z) {
+            System.out.println(z.getMessage());
+            System.exit(1);
         }
     }
 
@@ -184,9 +221,16 @@ public class Kopakabana {
             druzynyFinaly.get(i).setZwyciestwa(0);
         }
         for (int i=0; i<2; i++){
-            meczeFinaly.add(new Mecz2ogni(druzynyFinaly.get(i), druzynyFinaly.get(3-i)));
-            meczeFinaly.add(new PrzeciaganieLiny(druzynyFinaly.get(i), druzynyFinaly.get(3-i)));
-            meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(i), druzynyFinaly.get(3-i)));
-        }
+                int rand1, rand2, rand3, rand4, rand5;
+                rand1 = getRandomNumber(0,pomocniczy.size()-1);
+                rand2 = getRandomNumber(0,pomocniczy.size()-1);
+                rand3 = getRandomNumber(0,sedziowie.size()-1);
+                rand4 = getRandomNumber(0,sedziowie.size()-1);
+                rand5 = getRandomNumber(0,sedziowie.size()-1);
+                meczeFinaly.add(new Mecz2ogni(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3)));
+                meczeFinaly.add(new PrzeciaganieLiny(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand4)));
+                meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand5),  pomocniczy.get(rand1), pomocniczy.get(rand2)));
+            }
+        //tak jak pisalem wyzej w komentarzu, nieco tych randow jest ale co zrobic
     }
 }
