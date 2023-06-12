@@ -3,7 +3,7 @@ public class Sedzia_pomocniczy extends Sedzia{
         super(i,n);
     }
 
-    public Sedzia_pomocniczy(Sedzia_pomocniczy pom1) {
+    Sedzia_pomocniczy(Sedzia_pomocniczy pom1) {
         super(pom1);
     }
 }

@@ -10,7 +10,7 @@ abstract class Mecz {
     Mecz(Druzyna d0, Druzyna d1, Sedzia s){
         druzyna0=d0;
         druzyna1=d1;
-        sedzia = new Sedzia(s);
+        sedzia = s;
         //jesli jakies errory z sedzia to moze przez to
     }
     public void wynik(){

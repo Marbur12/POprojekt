@@ -4,8 +4,8 @@ public final class MeczSiatkowki extends Mecz{
     private Sedzia_pomocniczy pom1, pom2;
     MeczSiatkowki(Druzyna d0, Druzyna d1,Sedzia s, Sedzia_pomocniczy sp1, Sedzia_pomocniczy sp2){
         super(d0,d1,s);
-        pom1 = new Sedzia_pomocniczy(sp1);
-        pom2 = new Sedzia_pomocniczy(sp2);
+        pom1 = sp1;
+        pom2 = sp2;
         //jesli jakies problemy z sedziami to moze tu?
     }
     /*
