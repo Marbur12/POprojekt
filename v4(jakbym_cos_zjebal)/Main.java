@@ -8,6 +8,30 @@ public class Main {
     na podstawie wczesniej podanej liczby
     uwzglednilem rowniez wypisywanie druzyn, sedziow aby mozna bylo latwiej podjac decyzje o dodaniu ew usunieciu
     */
+    static Druzyna NazwaDruzyny(Kopakabana plaza){
+        System.out.println("Podaj nazwe druzyny!");
+        Scanner myObj = new Scanner(System.in);
+        String nazwa_druzyny = myObj.nextLine();
+        return new Druzyna(nazwa_druzyny);
+    }
+    static Sedzia NazwaSedziego(Kopakabana plaza){
+        System.out.println("Podaj imie sedziego");
+        Scanner myObj = new Scanner(System.in);
+        String imie = myObj.nextLine();
+        System.out.println("Podaj nazwisko sedziego");
+        String nazwisko = myObj.nextLine();
+        return new Sedzia(imie, nazwisko);
+    }
+    static Sedzia_pomocniczy NazwaSedziegoPom(Kopakabana plaza){
+        System.out.println("Podaj imie sedziego pomocniczego");
+        Scanner myObj = new Scanner(System.in);
+        String imie = myObj.nextLine();
+        System.out.println("Podaj nazwisko sedziego pomocniczego");
+        String nazwisko = myObj.nextLine();
+        Sedzia_pomocniczy sedzia = new Sedzia_pomocniczy(imie, nazwisko);
+        return sedzia;
+    }
+    
     static void wypiszopcjeSedziego(){
         System.out.println("Wybierz co chcesz zrobic");
         System.out.println("1.Dodaj sedziego");
@@ -15,6 +39,28 @@ public class Main {
         System.out.println("3.Usun sedziego");
         System.out.println("4.Usun sedziego pomocniczego");
         System.out.println("5-powrot");
+    }
+    
+    static void wypiszopcjeDruzyny(){
+        System.out.println("Wybierz co chcesz zrobic");
+        System.out.println("1-Zglos druzyne");
+        System.out.println("2-Wycofaj druzyne");
+        System.out.println("3-powrot");
+    }
+    static void wypiszOpcjeMeczy(){
+        System.out.println("Co chcesz zrobic?");
+        System.out.println("1.Generuj mecze");
+        System.out.println("2.Generuj polfinaly");
+        System.out.println("3.Generuj finaly");
+        System.out.println("4.powrot");
+    }
+    static void wypiszMenu(){
+        System.out.println("Co chcesz zrobic?");
+        System.out.println("1-Stworz liste druzyn");
+        System.out.println("2-Stworz liste sedziow");
+        System.out.println("3-Organizuj rozgrywki");
+        System.out.println("4-Wyświetl tabele wynikow");
+        System.out.println("5-Wyjdz");
     }
     //gopnik: lekki refactoring?
     
@@ -25,10 +71,7 @@ public class Main {
                 i=1;
                 System.out.println("Oto lista druzyn");
                 plaza.wypiszDruzyny();
-                System.out.println("Wybierz co chcesz zrobic");
-                System.out.println("1-Zglos druzyne");
-                System.out.println("2-Wycofaj druzyne");
-                System.out.println("3-powrot");
+                wypiszopcjeDruzyny();
                 Scanner myObj = new Scanner(System.in);
                 int wybor_uzytkownika = myObj.nextInt();
                 do{
@@ -50,14 +93,12 @@ public class Main {
                 break;
             case 3:
                 i=1;
-                System.out.println("Co chcesz zrobic?");
-                System.out.println("1.Generuj mecze");
-                System.out.println("2.Generuj polfinaly");
-                System.out.println("3.powrot");
+                wypiszOpcjeMeczy();
                 myObj = new Scanner(System.in);
                 wybor_uzytkownika = myObj.nextInt();
                 do{
                     wyborMecze(wybor_uzytkownika, plaza);
+                    wybor_uzytkownika = myObj.nextInt();
                 }while(wybor_uzytkownika!=4);
                 break;
                 //tutaj powinna byc funkcja odpowiadajaca za stworzenie jednego z trzech meczy
@@ -73,44 +114,15 @@ public class Main {
                     System.out.println(z.getMessage());
                 }
                 break;
+            case 5:
+                System.exit(0);
+                //ustalilem ze jednak tutaj wyjsciie
             default:
                 System.out.println("Podaj liczbe z odpowiedniego zakresu!");
                 break;
         }
         }
-    //funkcja NazwaDruzyny skraca kod, zrobilem ja po to aby nie pisac tego kodu za kazdym razem
-    //kiedy chcemy zglosic, usunac druzyne itp
-    static Druzyna NazwaDruzyny(Kopakabana plaza){
-        System.out.println("Podaj nazwe druzyny!");
-        Scanner myObj = new Scanner(System.in);
-        String nazwa_druzyny = myObj.nextLine();
-        return new Druzyna(nazwa_druzyny);
-    }
-    //analogicznie zrobilem z NazwaSedziego jak i NazwaSedziegoPom
-    static Sedzia NazwaSedziego(Kopakabana plaza){
-        System.out.println("Podaj imie sedziego");
-        Scanner myObj = new Scanner(System.in);
-        String imie = myObj.nextLine();
-        System.out.println("Podaj nazwisko sedziego");
-        String nazwisko = myObj.nextLine();
-        return new Sedzia(imie, nazwisko);
-    }
-    static Sedzia_pomocniczy NazwaSedziegoPom(Kopakabana plaza){
-        System.out.println("Podaj imie sedziego pomocniczego");
-        Scanner myObj = new Scanner(System.in);
-        String imie = myObj.nextLine();
-        System.out.println("Podaj nazwisko sedziego pomocniczego");
-        String nazwisko = myObj.nextLine();
-        return new Sedzia_pomocniczy(imie, nazwisko);
-    }
-    /*co do funkcji wyborMeczu, wlasnie nie wiem co z nia zrobic, ogolnie problem polega na tym
-    * ze jest to dosc duzy blok kodu, ktory ma za zadanie zebrac dane potrzebne do stworzenia meczu
-    * typu nazwy druzyn ktore beda grac, nazwiska sedziow, wynik itp, problem polega na tym ze
-    * zeby zorganizowac to w funkcji musielibysmy zwrocic kilka roznych obiektow etc (nie wiem czy
-    * rzutowanie w gore lub dol to rozwiaze, bo srednio to umiem) do tego dochodzi problem z sedziami
-    * pomocniczymi ktorzy wystepuja w klasie meczu siatkowki, imo mozna jedynie ukrocic ten caly jebitny
-    * blok, chyba ze ty masz jakis pomysl na zabawe z tymi funkcjami
-    * */
+    
     //funkcja wyborDruzyna odpowiada, za zgloszenie lub wycofanie druzyny, przy czym wykorzystalem
     //wczesniej opisana funkcje nazwaDruzyny aby skrocic kod
     static void wyborDruzyna(int chose, Kopakabana plaza){
@@ -126,10 +138,7 @@ public class Main {
             default:
                 break;
         }
-        System.out.println("Wybierz co chcesz zrobic");
-        System.out.println("1-Zglos druzyne");
-        System.out.println("2-Wycofaj druzyne");
-        System.out.println("3-powrot");
+        wypiszopcjeDruzyny();
     }
     //funkcja wyborSedzia odpowiada za dodanie lub usuniecie sedziego, przy czym wykorzystalem
     //wczesniej opisana funkcje nazwaSedziego aby skrocic kod
@@ -141,7 +150,7 @@ public class Main {
                 break;
             case 2:
                 Sedzia_pomocniczy s = NazwaSedziegoPom(plaza);
-                plaza.dodajSedziego(s);
+                plaza.dodajSedziegoPomocniczego(s);
                 break;
 
             case 3:
@@ -150,7 +159,7 @@ public class Main {
                 break;
             case 4:
                 s = NazwaSedziegoPom(plaza);
-                plaza.usunSedziego(s);
+                plaza.usunSedziegoPomocniczego(s);
                 break;
             default:
                 break;
@@ -160,6 +169,7 @@ public class Main {
     static void wyborMecze(int chose, Kopakabana plaza1){
         switch(chose){
             case 1:
+                if(plaza1.rozmiarMeczy()==0) {
                 try {
                     if (plaza1.rozmiarDruzyn() < 2){
                         throw new ZlaObsluga("zla malo druzyn");
@@ -181,14 +191,16 @@ public class Main {
                     }
                     for (int i = 0; i < plaza1.rozmiarDruzyn(); i++) {
                         System.out.println(plaza1.zwrocDruzyne(i) + "Liczba wygranych: " + plaza1.zwrocDruzyne(i).getZwyciestwa());
-                    }
-                    break;
+                    }              
                 }catch(ZlaObsluga z){
                     System.out.println("wykryto blad");
                     System.out.println(z.getMessage());
+                }else{
+                System.out.println("Mecze zostaly juz wygenerowane!");
                 }
+                break;
             case 2:
-
+                 if(plaza1.rozmiarPolfinaly()==0){
                     plaza1.generujPolfinaly();
                     System.out.println("Polfinaly!!!!!!");
                     for (int i = 0; i < plaza1.getMeczePolfinaly().size(); i++) {
@@ -201,25 +213,21 @@ public class Main {
                             typMeczu = "PrzeciaganieLiny";
                         System.out.println(i + ". Mecz:" + typMeczu + " " + plaza1.getMeczePolfinaly().get(i).druzyna0 + " vs " + plaza1.getMeczePolfinaly().get(i).druzyna1);
                     }
+                 }else{
+                    System.out.println("Juz rozegrano polfinaly!!");
+                 }
                     break;
-
+                case 3:
+                    plaza1.generujFinaly();
+                break;
+                    //nie wiem czy to dziala bo jeszcze nad tym nie myslalem tylko zgralem tutaj
             default:
                 break;
         }
-        System.out.println("Co chcesz zrobic?");
-        System.out.println("1.Generuj mecze");
-        System.out.println("2.Generuj polfinaly");
-        System.out.println("3.Zobacz tabele wynikow");
-        System.out.println("4.powrot");
+        wypiszOpcjeMeczy();
     }
         
-    static void wypiszMenu(){
-        System.out.println("Co chcesz zrobic?");
-        System.out.println("1-Stworz liste druzyn");
-        System.out.println("2-Stworz liste sedziow");
-        System.out.println("3-Organizuj rozgrywki");
-        System.out.println("4-Wyświetl tabele wynikow");
-    }
+  
 
     public static void main(String[] args) {
         try{
@@ -243,7 +251,7 @@ public class Main {
         Scanner myObj = new Scanner(System.in);
         String nazwa_druzyny, imie, nazwisko;
         Kopakabana plaza = new Kopakabana();
-        while(wybor!=5) {
+        while(true) {
             wypiszMenu();
             wybor = myObj.nextInt();
             wyborGlowny(wybor, plaza);
