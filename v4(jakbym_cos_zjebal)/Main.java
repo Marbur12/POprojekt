@@ -195,7 +195,7 @@ public class Main {
                 }catch(ZlaObsluga z){
                     System.out.println("wykryto blad");
                     System.out.println(z.getMessage());
-                }else{
+                }}else{
                 System.out.println("Mecze zostaly juz wygenerowane!");
                 }
                 break;
