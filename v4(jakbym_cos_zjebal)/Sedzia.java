@@ -1,11 +1,14 @@
 import java.io.Serializable;
 
-public class Sedzia extends Osoba implements Serializable {
+public class Sedzia implements Serializable {
+    protected String imie, nazwisko;
     Sedzia(String i, String n){
-        super(i,n);
+        imie=i;
+        nazwisko=n;
     }
     public Sedzia(Sedzia s) {
-        super(s);
+        imie=s.imie;
+        nazwisko=s.nazwisko;;
     }
     public String toString(){
         return imie+" "+nazwisko;

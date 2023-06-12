@@ -6,15 +6,15 @@ import java.util.Random;
 //gopnik: tego oto uzylem do zrobienia posortowanej tablicy wedllug wynikow
 
 public class Kopakabana implements Serializable {
-    private ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
-    private ArrayList<Sedzia_pomocniczy> pomocniczy = new ArrayList<Sedzia_pomocniczy>();
+    private final ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
+    private final ArrayList<Sedzia_pomocniczy> pomocniczy = new ArrayList<Sedzia_pomocniczy>();
     //gopnik: dodatkowa lista sedziow pomocniczych jesli dziala to pomaga
-    private ArrayList<Mecz> mecze = new ArrayList<Mecz>();
-    private ArrayList<Druzyna> druzyny = new ArrayList<Druzyna>();
-    private ArrayList<Druzyna> druzynyPolfinaly = new ArrayList<Druzyna>();
-    private ArrayList<Druzyna> druzynyFinaly = new ArrayList<Druzyna>();
-    private ArrayList<Mecz> meczePolfinaly = new ArrayList<Mecz>();
-    private ArrayList<Mecz> meczeFinaly = new ArrayList<Mecz>();
+    private final ArrayList<Mecz> mecze = new ArrayList<Mecz>();
+    private final ArrayList<Druzyna> druzyny = new ArrayList<Druzyna>();
+    private final ArrayList<Druzyna> druzynyPolfinaly = new ArrayList<Druzyna>();
+    private final ArrayList<Druzyna> druzynyFinaly = new ArrayList<Druzyna>();
+    private final ArrayList<Mecz> meczePolfinaly = new ArrayList<Mecz>();
+    private final ArrayList<Mecz> meczeFinaly = new ArrayList<Mecz>();
     
     //gopnik: szybkie random number do generowania sedziow
     public int getRandomNumber(int min, int max) {
@@ -58,27 +58,7 @@ public class Kopakabana implements Serializable {
             i++;
         }
     }
-    public int rozmiarDruzyn(){
-        return druzyny.size();
-    }
-    public Druzyna zwrocDruzyne(int i){
-        return druzyny.get(i);
-    }
-    public int rozmiarSedziow(){
-        return sedziowie.size();
-    }
-    //gopnik: bylo mi potrzebne
-    public void wypiszSedziow(){
-        int i=1;
-        for(Sedzia sedzia : sedziowie){
-            System.out.println(i + "." + sedzia.toString());
-            i++;
-        }
-    }
-    public int rozmiarPolfinaly(){return meczePolfinaly.size();}
-    //sluzy do tego aby sprawdzic czy byly juz rozegrane polfinaly
-    public int rozmiarFinaly(){return meczeFinaly.size();}
-    //zaraz wykorzystam ten rozmiar finalow, bo dosc niedawno dodane
+
     public int rozmiarMeczy(){
         return mecze.size();
     }
@@ -96,19 +76,24 @@ public class Kopakabana implements Serializable {
             System.out.println("Nie ma takiej druzyny!");
         }
     }
-    public Druzyna odczytaj_druzyne(int numer){
-        return druzyny.get(numer);
+    public void wypiszSedziow(){
+        int i=1;
+        for(Sedzia sedzia : sedziowie){
+            System.out.println(i + "." + sedzia.toString());
+            i++;
+        }
     }
-    public Sedzia odczytaj_sedzie(int numer){
-        return sedziowie.get(numer);
+    public int rozmiarPolfinaly(){return meczePolfinaly.size();}
+    //sluzy do tego aby sprawdzic czy byly juz rozegrane polfinaly
+    public int rozmiarDruzyn(){
+        return druzyny.size();
     }
-    public void dodajMecz(Mecz m){
-        mecze.add(m);
+    public Druzyna zwrocDruzyne(int i){
+        return druzyny.get(i);
     }
-    public void usunMecz(Mecz m){
-        mecze.remove(m);
+    public int rozmiarSedziow(){
+        return sedziowie.size();
     }
-    //gopnik: imo mozna niektore z tych szarakow wyjebac
     public ArrayList<Mecz> getMeczePolfinaly(){return meczePolfinaly;}
     public void generujMecze(){
         //generuje mecze z wszystkimi druzynami
@@ -185,24 +170,29 @@ public class Kopakabana implements Serializable {
             }
             top=nowytop;
         }
+        //tworzę nową listę druzyn które grają w półfinałach
         for (int i=0;i<top.size();i++) {
             druzynyPolfinaly.add(new Druzyna(top.get(i)));
             druzynyPolfinaly.get(i).setZwyciestwa(0);
         }
+        //tworzę listę meczy półfinałowych
         try {
             if (sedziowie.size() < 1 || pomocniczy.size() < 2) {
                 throw new ZlaObsluga("za malo sedziow!");
             }
-            int rand1, rand2, rand3, rand4, rand5;
+            int rand1, rand2, rand3;
             for (int i = 0; i < 2; i++) {
                 rand1 = getRandomNumber(0, pomocniczy.size() - 1);
-                rand2 = getRandomNumber(0, pomocniczy.size() - 1);
+                if (rand1==0)
+                    rand2 = 1;
+                else
+                    rand2=rand1-1;
                 rand3 = getRandomNumber(0, sedziowie.size() - 1);
-                rand4 = getRandomNumber(0, sedziowie.size() - 1);
-                rand5 = getRandomNumber(0, sedziowie.size() - 1);
                 meczePolfinaly.add(new Mecz2ogni(top.get(i), top.get(3 - i), sedziowie.get(rand3)));
-                meczePolfinaly.add(new PrzeciaganieLiny(top.get(i), top.get(3 - i), sedziowie.get(rand4)));
-                meczePolfinaly.add(new MeczSiatkowki(top.get(i), top.get(3 - i), sedziowie.get(rand5), pomocniczy.get(rand1), pomocniczy.get(rand2)));
+                rand3 = getRandomNumber(0, sedziowie.size() - 1);
+                meczePolfinaly.add(new PrzeciaganieLiny(top.get(i), top.get(3 - i), sedziowie.get(rand3)));
+                rand3 = getRandomNumber(0, sedziowie.size() - 1);
+                meczePolfinaly.add(new MeczSiatkowki(top.get(i), top.get(3 - i), sedziowie.get(rand3), pomocniczy.get(rand1), pomocniczy.get(rand2)));
             }
         } catch (ZlaObsluga z) {
             System.out.println(z.getMessage());
@@ -211,6 +201,9 @@ public class Kopakabana implements Serializable {
     }
 
     public void generujFinaly() {
+        //sortuje druzyny aby ustalić które grają w półfinałach
+        //jako że każda drużyna gra po 3 mecze półfinałowe to nigdy nie będzie sytuacji
+        //brzegowej kiedy więcej niż 2 drużyny mają tyle samo zwycięzc
         druzynyPolfinaly.sort(new Comparator<Druzyna>() {
             @Override
             public int compare(Druzyna o1, Druzyna o2) {
@@ -223,15 +216,18 @@ public class Kopakabana implements Serializable {
         }
         for (int i=0; i<2; i++){
                 int rand1, rand2, rand3, rand4, rand5;
-                rand1 = getRandomNumber(0,pomocniczy.size()-1);
-                rand2 = getRandomNumber(0,pomocniczy.size()-1);
+                rand1 = getRandomNumber(0, pomocniczy.size() - 1);
+                do {
+                    rand2 = getRandomNumber(0, pomocniczy.size() - 1);
+                }while(rand2==rand1);
                 rand3 = getRandomNumber(0,sedziowie.size()-1);
-                rand4 = getRandomNumber(0,sedziowie.size()-1);
-                rand5 = getRandomNumber(0,sedziowie.size()-1);
                 meczeFinaly.add(new Mecz2ogni(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3)));
-                meczeFinaly.add(new PrzeciaganieLiny(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand4)));
-                meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand5),  pomocniczy.get(rand1), pomocniczy.get(rand2)));
+                rand3 = getRandomNumber(0,sedziowie.size()-1);
+                meczeFinaly.add(new PrzeciaganieLiny(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3)));
+                rand3 = getRandomNumber(0,sedziowie.size()-1);
+                meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3),  pomocniczy.get(rand1), pomocniczy.get(rand2)));
             }
         //tak jak pisalem wyzej w komentarzu, nieco tych randow jest ale co zrobic
+        //MB: kinda better solution tera
     }
 }

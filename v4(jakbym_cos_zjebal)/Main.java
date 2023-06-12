@@ -216,6 +216,7 @@ public class Main{
                         else if (plaza1.getMeczePolfinaly().get(i) instanceof PrzeciaganieLiny)
                             typMeczu = "PrzeciaganieLiny";
                         System.out.println(i + ". Mecz:" + typMeczu + " " + plaza1.getMeczePolfinaly().get(i).druzyna0 + " vs " + plaza1.getMeczePolfinaly().get(i).druzyna1);
+                        plaza1.getMeczePolfinaly().get(i).wynik();
                     }
                  }else{
                     System.out.println("Juz rozegrano polfinaly!!");
@@ -296,7 +297,7 @@ public class Main{
     public static void main(String[] args) {
         try{
         //test
-            /*
+        /*
         Kopakabana plaza = new Kopakabana();
         plaza.zglosDruzyna(new Druzyna("Patrysie"));
         plaza.zglosDruzyna(new Druzyna("Chuje"));
@@ -309,7 +310,7 @@ public class Main{
         Serializuj(plaza, "hui");
         //gopnik: w nastepnych linijkach wykorzystalem nowo napisane funkcje, jesli beda nowe bledy to najpewniej z tego powodu
        //gopnik: przenioslem te generacje meczy i polfinalow do wyborMecze
-*/
+        */
         //end test
         //concluding działa zostawiam gdyby moduł przydał się na przyszłość
 
@@ -317,9 +318,9 @@ public class Main{
         int wybor=0;
         Scanner myObj = new Scanner(System.in);
         String nazwa_druzyny, imie, nazwisko;
-        //Kopakabana plaza = new Kopakabana();
-        Kopakabana plaza = null;
-        plaza = Deserializuj("hui.ser");
+        Kopakabana plaza = new Kopakabana();
+        //Kopakabana plaza = null;
+        //plaza = Deserializuj("hui.ser");
         while(true) {
             wypiszMenu();
             wybor = myObj.nextInt();
