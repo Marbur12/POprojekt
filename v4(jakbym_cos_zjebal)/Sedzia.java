@@ -5,4 +5,7 @@ public class Sedzia extends Osoba{
     public Sedzia(Sedzia s) {
         super(s);
     }
+    public String toString(){
+        return imie+" "+nazwisko;
+    }
 }
