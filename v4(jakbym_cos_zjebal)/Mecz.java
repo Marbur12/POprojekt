@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
 
-abstract class Mecz {
+abstract class Mecz implements Serializable {
     protected Sedzia sedzia;
     protected Druzyna druzyna0, druzyna1;
     protected int zwyciezca;

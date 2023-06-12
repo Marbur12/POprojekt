@@ -1,9 +1,10 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
 import java.util.InputMismatchException;
 
-public class Main {
+public class Main{
     /*funkcja odpowiada za wyswietlenie zarzadzania konkretnymi listami, case1 to zarzadzanie druzynami, case2 sedziami itp
     na podstawie wczesniej podanej liczby
     uwzglednilem rowniez wypisywanie druzyn, sedziow aby mozna bylo latwiej podjac decyzje o dodaniu ew usunieciu
@@ -107,6 +108,9 @@ public class Main {
                     //gopnik: lapanie wyjatku oraz funkcja z sortowaniem
                     if(plaza.rozmiarDruzyn()<1 || plaza.rozmiarSedziow()<1){
                         throw new ZlaObsluga("nie podales jeszcze druzyn!");
+                    }
+                    if(plaza.rozmiarSedziow()<1){
+                        throw new ZlaObsluga("nie podales jeszcze sedziow!");
                     }
                     plaza.sortowanie();
 
@@ -227,22 +231,85 @@ public class Main {
         wypiszOpcjeMeczy();
     }
         
-  
+    public static void Serializuj(Kopakabana plaza, String path) {
+        FileOutputStream plik = null;
+        try {
+            plik = new FileOutputStream(path+".ser");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ObjectOutputStream wyj = null;
+        try {
+            wyj = new ObjectOutputStream(plik);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            wyj.writeObject(plaza);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            wyj.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            plik.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Kopakabana Deserializuj(String path){
+        FileInputStream plik = null;
+        try {
+            plik = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ObjectInputStream in = null;
+        try {
+            in = new ObjectInputStream(plik);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Kopakabana plaza=null;
+        try {
+            plaza = (Kopakabana) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            in.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            plik.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return plaza;
+    }
 
     public static void main(String[] args) {
         try{
-        Kopakabana plaza1 = new Kopakabana();
-        //test site
-        /*
-        plaza1.zglosDruzyna(new Druzyna("Patrysie"));
-        plaza1.zglosDruzyna(new Druzyna("Chuje"));
-        plaza1.zglosDruzyna(new Druzyna("Debile"));
-        plaza1.zglosDruzyna(new Druzyna("Cioty"));
-        plaza1.zglosDruzyna(new Druzyna("Farfocle"));
-        */
+        //test
+            /*
+        Kopakabana plaza = new Kopakabana();
+        plaza.zglosDruzyna(new Druzyna("Patrysie"));
+        plaza.zglosDruzyna(new Druzyna("Chuje"));
+        plaza.zglosDruzyna(new Druzyna("Debile"));
+        plaza.zglosDruzyna(new Druzyna("Cioty"));
+        plaza.zglosDruzyna(new Druzyna("Farfocle"));
+        plaza.dodajSedziego(new Sedzia("Tfuj", "Stary"));
+        plaza.dodajSedziegoPomocniczego(new Sedzia_pomocniczy("Jest","Jebanmy"));
+        plaza.dodajSedziegoPomocniczego(new Sedzia_pomocniczy("Jest","jkasfd"));
+        Serializuj(plaza, "hui");
         //gopnik: w nastepnych linijkach wykorzystalem nowo napisane funkcje, jesli beda nowe bledy to najpewniej z tego powodu
        //gopnik: przenioslem te generacje meczy i polfinalow do wyborMecze
-
+*/
         //end test
         //concluding działa zostawiam gdyby moduł przydał się na przyszłość
 
@@ -250,7 +317,9 @@ public class Main {
         int wybor=0;
         Scanner myObj = new Scanner(System.in);
         String nazwa_druzyny, imie, nazwisko;
-        Kopakabana plaza = new Kopakabana();
+        //Kopakabana plaza = new Kopakabana();
+        Kopakabana plaza = null;
+        plaza = Deserializuj("hui.ser");
         while(true) {
             wypiszMenu();
             wybor = myObj.nextInt();

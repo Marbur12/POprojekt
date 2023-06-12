@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
 //gopnik: tego oto uzylem do zrobienia posortowanej tablicy wedllug wynikow
 
-public class Kopakabana {
+public class Kopakabana implements Serializable {
     private ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
     private ArrayList<Sedzia_pomocniczy> pomocniczy = new ArrayList<Sedzia_pomocniczy>();
     //gopnik: dodatkowa lista sedziow pomocniczych jesli dziala to pomaga

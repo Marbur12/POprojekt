@@ -1,4 +1,6 @@
-public class Sedzia extends Osoba{
+import java.io.Serializable;
+
+public class Sedzia extends Osoba implements Serializable {
     Sedzia(String i, String n){
         super(i,n);
     }

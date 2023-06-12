@@ -1,4 +1,6 @@
-abstract class Osoba {
+import java.io.Serializable;
+
+abstract class Osoba implements Serializable {
     protected String imie, nazwisko;
     public Osoba(String ii, String nn){
         imie=ii;

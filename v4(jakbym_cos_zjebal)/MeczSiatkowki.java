@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public final class MeczSiatkowki extends Mecz{
+public final class MeczSiatkowki extends Mecz implements Serializable {
     private Sedzia_pomocniczy pom1, pom2;
     MeczSiatkowki(Druzyna d0, Druzyna d1,Sedzia s, Sedzia_pomocniczy sp1, Sedzia_pomocniczy sp2){
         super(d0,d1,s);

@@ -1,4 +1,6 @@
-public class Sedzia_pomocniczy extends Sedzia{
+import java.io.Serializable;
+
+public class Sedzia_pomocniczy extends Sedzia implements Serializable {
     Sedzia_pomocniczy(String i, String n){
         super(i,n);
     }

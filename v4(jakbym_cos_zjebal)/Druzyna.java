@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Druzyna {
+public class Druzyna implements Serializable{
     private String nazwa;
     private final ArrayList<Gracz> zawodnicy = new ArrayList<Gracz>();
     private int zwyciestwa = 0;
