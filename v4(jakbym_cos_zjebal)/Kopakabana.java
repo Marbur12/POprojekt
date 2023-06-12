@@ -70,7 +70,7 @@ public class Kopakabana {
     public void wypiszSedziow(){
         int i=1;
         for(Sedzia sedzia : sedziowie){
-            System.out.println(i + "." + sedzia);
+            System.out.println(i + "." + sedzia.toString();
             i++;
         }
     }
