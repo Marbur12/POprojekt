@@ -6,6 +6,7 @@ public final class MeczSiatkowki extends Mecz{
         super(d0,d1,s);
         pom1 = new Sedzia_pomocniczy(sp1);
         pom2 = new Sedzia_pomocniczy(sp2);
+        //jesli jakies problemy z sedziami to moze tu?
     }
     /*
     public void wynik(int wynik1, int wynik2, Sedzia s, Sedzia_pomocniczy p1, Sedzia_pomocniczy p2){
