@@ -2,8 +2,10 @@ import java.util.ArrayList;
 
 public final class MeczSiatkowki extends Mecz{
     private Sedzia_pomocniczy pom1, pom2;
-    MeczSiatkowki(Druzyna d0, Druzyna d1){
-        super(d0,d1);
+    MeczSiatkowki(Druzyna d0, Druzyna d1,Sedzia s, Sedzia_pomocniczy sp1, Sedzia_pomocniczy sp2){
+        super(d0,d1,s);
+        pom1 = new Sedzia_pomocniczy(sp1);
+        pom2 = new Sedzia_pomocniczy(sp2);
     }
     /*
     public void wynik(int wynik1, int wynik2, Sedzia s, Sedzia_pomocniczy p1, Sedzia_pomocniczy p2){
