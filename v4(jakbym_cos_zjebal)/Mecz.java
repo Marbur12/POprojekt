@@ -1,20 +1,17 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-class wynikException extends RuntimeException{
-    private int wynik;
-    public wynikException(){}
-    public wynikException(String wiadomosc, int w){super(wiadomosc);wynik=w;}
-}
 
 abstract class Mecz {
     protected Sedzia sedzia;
     protected Druzyna druzyna0, druzyna1;
     protected int zwyciezca;
     protected boolean czyRozegrany;
-    Mecz(Druzyna d0, Druzyna d1){
+    Mecz(Druzyna d0, Druzyna d1, Sedzia s){
         druzyna0=d0;
         druzyna1=d1;
+        sedzia = new Sedzia(s);
+        //jesli jakies errory z sedzia to moze przez to
     }
     public void wynik(){
         try{
