@@ -14,6 +14,8 @@ abstract class Mecz implements Serializable {
         sedzia = s;
         //jesli jakies errory z sedzia to moze przez to
     }
+    public abstract String rodzajMeczu();
+    //tutaj opcja od meczy
     public void wynik(){
         try{
             System.out.println("Prosze podaj wyniki: (jesli byl remis, podaj wyniki dogrywki)\nWynik 1:");
@@ -71,5 +73,5 @@ abstract class Mecz implements Serializable {
     public void modCzyRozegrany(boolean t){
         czyRozegrany = t;
     }
-    public abstract String Typgry();
+
 }

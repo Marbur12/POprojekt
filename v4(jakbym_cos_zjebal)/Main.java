@@ -84,6 +84,8 @@ public class Main{
                 i=1;
                 System.out.println("Oto lista sedziow");
                 plaza.wypiszSedziow();
+                System.out.println("Oto lista sedziow pomocniczych");
+                plaza.wypiszSedziowPomoczniczych();
                 wypiszopcjeSedziego();
                 myObj = new Scanner(System.in);
                 wybor_uzytkownika = myObj.nextInt();
@@ -182,12 +184,7 @@ public class Main{
                     //gopnik: w nastepnych linijkach wykorzystalem nowo napisane funkcje, jesli beda nowe bledy to najpewniej z tego powodu
                     for (int i = 0; i < plaza1.rozmiarMeczy(); i++) {
                         String typMeczu = "";
-                        if (plaza1.zwrocMecz(i) instanceof Mecz2ogni)
-                            typMeczu = "Mecz2ogni       ";
-                        else if (plaza1.zwrocMecz(i) instanceof MeczSiatkowki)
-                            typMeczu = "MeczSiatkowki   ";
-                        else if (plaza1.zwrocMecz(i) instanceof PrzeciaganieLiny)
-                            typMeczu = "PrzeciaganieLiny";
+                        typMeczu = plaza1.zwrocMecz(i).rodzajMeczu();
                         System.out.println(i + ". Mecz:" + typMeczu + " " + plaza1.zwrocMecz(i).druzyna0 + " vs " + plaza1.zwrocMecz(i).druzyna1);
                         //gopnik: imo tutaj mozna dodac proszenie o wyniki meczy a sedziow rowniez jako tako mozna losowac
                         //gopnik: zmienie nieco strukture metody wynik w klasie mecz
@@ -204,26 +201,35 @@ public class Main{
                 }
                 break;
             case 2:
+                if(plaza1.rozmiarDruzyn()>=4){
                  if(plaza1.rozmiarPolfinaly()==0){
                     plaza1.generujPolfinaly();
                     System.out.println("Polfinaly!!!!!!");
                     for (int i = 0; i < plaza1.getMeczePolfinaly().size(); i++) {
                         String typMeczu = "";
-                        if (plaza1.getMeczePolfinaly().get(i) instanceof Mecz2ogni)
-                            typMeczu = "Mecz2ogni       ";
-                        else if (plaza1.getMeczePolfinaly().get(i) instanceof MeczSiatkowki)
-                            typMeczu = "MeczSiatkowki   ";
-                        else if (plaza1.getMeczePolfinaly().get(i) instanceof PrzeciaganieLiny)
-                            typMeczu = "PrzeciaganieLiny";
+                        typMeczu = plaza1.zwrocMecz(i).rodzajMeczu();
                         System.out.println(i + ". Mecz:" + typMeczu + " " + plaza1.getMeczePolfinaly().get(i).druzyna0 + " vs " + plaza1.getMeczePolfinaly().get(i).druzyna1);
                         plaza1.getMeczePolfinaly().get(i).wynik();
                     }
                  }else{
                     System.out.println("Juz rozegrano polfinaly!!");
-                 }
+                 }}else{
+                    System.out.println("Dodaj wiecej druzyn!");
+                }
                     break;
                 case 3:
-                    plaza1.generujFinaly();
+                    if(plaza1.rozmiarPolfinaly()!=0 && plaza1.rozmiarFinaly()==0) {
+                        plaza1.generujFinaly();
+                        System.out.println("Finaly!!!!!!");
+                        for (int i = 0; i < plaza1.getMeczeFinaly().size(); i++) {
+                            String typMeczu = "";
+                            typMeczu = plaza1.zwrocMecz(i).rodzajMeczu();
+                            System.out.println(i + ". Mecz:" + typMeczu + " " + plaza1.getMeczeFinaly().get(i).druzyna0 + " vs " + plaza1.getMeczeFinaly().get(i).druzyna1);
+                            plaza1.getMeczeFinaly().get(i).wynik();
+                        }
+                    }else{
+                        System.out.println("Najpierw rozegraj polfinaly!");
+                    }
                 break;
                     //nie wiem czy to dziala bo jeszcze nad tym nie myslalem tylko zgralem tutaj
             default:

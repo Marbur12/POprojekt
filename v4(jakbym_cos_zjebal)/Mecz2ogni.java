@@ -5,8 +5,7 @@ public final class Mecz2ogni extends Mecz implements Serializable {
         super(d0,d1, s);
     }
 
-    @Override
-    public String Typgry() {
-        return null;
-    }
+        public String rodzajMeczu(){
+            return "Mecz 2 ogni";
+        }
 }
