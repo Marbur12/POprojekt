@@ -61,7 +61,8 @@ public class Main{
         System.out.println("2-Stworz liste sedziow");
         System.out.println("3-Organizuj rozgrywki");
         System.out.println("4-Wyświetl tabele wynikow");
-        System.out.println("5-Wyjdz");
+        System.out.println("5-Zapisz stan turnieju");
+        System.out.println("6-Wyjdz");
     }
     //gopnik: lekki refactoring?
     
@@ -108,7 +109,7 @@ public class Main{
             case 4:
                 try {
                     //gopnik: lapanie wyjatku oraz funkcja z sortowaniem
-                    if(plaza.rozmiarDruzyn()<1 || plaza.rozmiarSedziow()<1){
+                    if(plaza.rozmiarDruzyn()<1){
                         throw new ZlaObsluga("nie podales jeszcze druzyn!");
                     }
                     if(plaza.rozmiarSedziow()<1){
@@ -121,6 +122,32 @@ public class Main{
                 }
                 break;
             case 5:
+                myObj = new Scanner(System.in);
+                do {
+                    System.out.println("1-Zapisz stan turnieju\n2-Powrót");
+                    wybor_uzytkownika = myObj.nextInt();
+                    switch (wybor_uzytkownika) {
+                        case 1:
+                            System.out.println("Podaj nazwe pliku jaką chcesz utworzyć");
+                            int potwierdz=0;
+                            myObj = new Scanner(System.in);
+                            String path=myObj.nextLine();
+                            do{
+                                System.out.println("Proszę wpisać 1 aby potwiedzić lub 0 aby cofnać się do poprzedniego menu");
+                                potwierdz=myObj.nextInt();
+                                if (potwierdz==1) Serializuj(plaza, path);
+                                if (potwierdz>1) path=myObj.nextLine();
+                            }while (potwierdz>1);
+                            break;
+                        default:
+                            System.out.println("Podaj liczbe z odpowiedniego zakresu!");
+                            break;
+
+                    }
+                }while (wybor_uzytkownika!=2);
+
+                break;
+            case 6:
                 System.exit(0);
                 //ustalilem ze jednak tutaj wyjsciie
             default:
@@ -319,19 +346,28 @@ public class Main{
         */
         //end test
         //concluding działa zostawiam gdyby moduł przydał się na przyszłość
-
-        System.out.println("Witaj w zawodach plaży Kopakabana!");
-        int wybor=0;
-        Scanner myObj = new Scanner(System.in);
-        String nazwa_druzyny, imie, nazwisko;
-        Kopakabana plaza = new Kopakabana();
-        //Kopakabana plaza = null;
-        //plaza = Deserializuj("hui.ser");
-        while(true) {
-            wypiszMenu();
-            wybor = myObj.nextInt();
-            wyborGlowny(wybor, plaza);
-            //gopnik: funkcja wybor glowny decyduje czy bedziemy zarzadzac druzynami, sedziami czy inne opcje
+            Kopakabana plaza=null;
+            System.out.println("Witaj w zawodach plaży Kopakabana!\n1-Wczytaj wcześniej zapisany stan\n2-Stwórz nowy turniej");
+            Scanner myObj = new Scanner(System.in);
+            int wybor=myObj.nextInt();
+            if (wybor==1){
+                System.out.println("Podaj sciezke pliku do wczytania");
+                myObj=new Scanner(System.in);
+                String path=myObj.nextLine();
+                plaza = Deserializuj(path);
+            }
+            else {
+                plaza = new Kopakabana();
+            }
+            //Kopakabana plaza = null;
+            //plaza = Deserializuj("hui.ser");
+            wybor=0;
+            while(true) {
+                System.out.println(plaza);
+                wypiszMenu();
+                wybor = myObj.nextInt();
+                wyborGlowny(wybor, plaza);
+                //gopnik: funkcja wybor glowny decyduje czy bedziemy zarzadzac druzynami, sedziami czy inne opcje
             }
         }catch(InputMismatchException e){
             System.out.println("podaj liczbe!");
