@@ -9,6 +9,9 @@ public final class MeczSiatkowki extends Mecz implements Serializable {
         pom2 = sp2;
         //jesli jakies problemy z sedziami to moze tu?
     }
+    public String rodzajMeczu(){
+        return "Mecz siatkowki";
+    }
     /*
     public void wynik(int wynik1, int wynik2, Sedzia s, Sedzia_pomocniczy p1, Sedzia_pomocniczy p2){
         sedzia=new Sedzia(s);
