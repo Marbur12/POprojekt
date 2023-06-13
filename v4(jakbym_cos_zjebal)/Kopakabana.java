@@ -109,7 +109,7 @@ public class Kopakabana implements Serializable {
         return sedziowie.size();
     }
     public ArrayList<Mecz> getMeczePolfinaly(){return meczePolfinaly;}
-    public ArrayList<Mecz> getMeczePolfinaly(){return meczePolfinaly;}
+    public ArrayList<Mecz> getMeczeFinaly(){return meczeFinaly;}
     public void generujMecze(){
         //generuje mecze z wszystkimi druzynami
         //returnuje ci liste wszytskich meczy
