@@ -71,4 +71,5 @@ abstract class Mecz implements Serializable {
     public void modCzyRozegrany(boolean t){
         czyRozegrany = t;
     }
+    public abstract String Typgry();
 }
