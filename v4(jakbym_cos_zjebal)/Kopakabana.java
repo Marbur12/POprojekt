@@ -97,6 +97,7 @@ public class Kopakabana implements Serializable {
         }
     }
     public int rozmiarPolfinaly(){return meczePolfinaly.size();}
+    public int rozmiarFinaly(){return meczeFinaly.size();}
     //sluzy do tego aby sprawdzic czy byly juz rozegrane polfinaly
     public int rozmiarDruzyn(){
         return druzyny.size();
