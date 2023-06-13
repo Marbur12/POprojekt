@@ -77,10 +77,23 @@ public class Kopakabana implements Serializable {
         }
     }
     public void wypiszSedziow(){
+        if(sedziowie.size()!=0){
         int i=1;
         for(Sedzia sedzia : sedziowie){
             System.out.println(i + "." + sedzia.toString());
             i++;
+        }}else{
+            System.out.println("Lista sedziow jest pusta, pomoz ja wypelnic.");
+        }
+    }
+    public void wypiszSedziowPomoczniczych(){
+        if(pomocniczy.size()!=0){
+        int i=1;
+        for(Sedzia_pomocniczy sedzia_pom : pomocniczy){
+            System.out.println(i + "." + sedzia_pom.toString());
+            i++;
+        }}else{
+            System.out.println("Lista sedziow pomocniczych jest pusta, pomoz ja wypelnic.");
         }
     }
     public int rozmiarPolfinaly(){return meczePolfinaly.size();}
@@ -94,6 +107,7 @@ public class Kopakabana implements Serializable {
     public int rozmiarSedziow(){
         return sedziowie.size();
     }
+    public ArrayList<Mecz> getMeczePolfinaly(){return meczePolfinaly;}
     public ArrayList<Mecz> getMeczePolfinaly(){return meczePolfinaly;}
     public void generujMecze(){
         //generuje mecze z wszystkimi druzynami
@@ -217,9 +231,10 @@ public class Kopakabana implements Serializable {
         for (int i=0; i<2; i++){
                 int rand1, rand2, rand3, rand4, rand5;
                 rand1 = getRandomNumber(0, pomocniczy.size() - 1);
-                do {
-                    rand2 = getRandomNumber(0, pomocniczy.size() - 1);
-                }while(rand2==rand1);
+                if (rand1==0)
+                    rand2 = 1;
+                else
+                   rand2=rand1-1; 
                 rand3 = getRandomNumber(0,sedziowie.size()-1);
                 meczeFinaly.add(new Mecz2ogni(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3)));
                 rand3 = getRandomNumber(0,sedziowie.size()-1);
