@@ -6,7 +6,7 @@ public class Sedzia implements Serializable {
         imie=i;
         nazwisko=n;
     }
-    public Sedzia(Sedzia s) {
+    Sedzia(Sedzia s) {
         imie=s.imie;
         nazwisko=s.nazwisko;;
     }
