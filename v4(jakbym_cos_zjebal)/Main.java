@@ -226,7 +226,7 @@ public class Main{
                         plaza1.zwrocMecz(i).wynik();
                     }
                     for (int i = 0; i < plaza1.rozmiarDruzyn(); i++) {
-                        System.out.println(plaza1.zwrocDruzyne(i) + "Liczba wygranych: " + plaza1.zwrocDruzyne(i).getZwyciestwa());
+                        System.out.println("Druzyna "+plaza1.zwrocDruzyne(i) + " ma liczbe wygranych rowna: " + plaza1.zwrocDruzyne(i).getZwyciestwa());
                     }              
                 }catch(ZlaObsluga z){
                     System.out.println("wykryto blad");
