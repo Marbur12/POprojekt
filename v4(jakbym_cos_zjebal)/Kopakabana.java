@@ -225,7 +225,7 @@ public class Kopakabana implements Serializable {
             druzynyFinaly.get(i).setZwyciestwa(0);
         }
         for (int i=0; i<2; i++){
-                int rand1, rand2, rand3, rand4, rand5;
+                int rand1, rand2, rand3;
                 rand1 = getRandomNumber(0, pomocniczy.size() - 1);
                 if (rand1==0)
                     rand2 = 1;
