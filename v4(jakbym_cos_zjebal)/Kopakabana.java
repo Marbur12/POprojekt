@@ -68,13 +68,16 @@ public class Kopakabana implements Serializable {
         return mecze.get(i);
     }
     public void zglosDruzyna(Druzyna d){
+        if(druzyny.size()==0){
+            druzyny.add(d);
+        }else{
         for(int i=0;i<druzyny.size();i++){
             if(druzyny.get(i).toString()!=d.toString()){
                 druzyny.add(d);
             }else{
                 System.out.println("Taka druzyna juz istnieje!");
             }
-        }
+        }}
     }
     public void wycofajDruzyne(String nazwa){
         for(int i=0;i<druzyny.size();i++) {
