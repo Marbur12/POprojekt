@@ -164,8 +164,10 @@ public class Main{
                 plaza.zglosDruzyna(d);
                 break;
             case 2:
-                d = NazwaDruzyny(plaza);
-                plaza.wycofajDruzyne(d);
+                System.out.println("Podaj nazwe druzyny!");
+                Scanner myObj = new Scanner(System.in);
+                String nazwa_druzyny = myObj.nextLine();
+                plaza.wycofajDruzyne(nazwa_druzyny);
                 break;
             default:
                 break;
@@ -186,12 +188,20 @@ public class Main{
                 break;
 
             case 3:
-                sedzia = NazwaSedziego(plaza);
-                plaza.usunSedziego(sedzia);
+                System.out.println("Podaj imie sedziego");
+                Scanner myObj = new Scanner(System.in);
+                String imie = myObj.nextLine();
+                System.out.println("Podaj nazwisko sedziego");
+                String nazwisko = myObj.nextLine();
+                plaza.usunSedziego(imie, nazwisko);
                 break;
             case 4:
-                s = NazwaSedziegoPom(plaza);
-                plaza.usunSedziegoPomocniczego(s);
+                System.out.println("Podaj imie sedziego");
+                myObj = new Scanner(System.in);
+                imie = myObj.nextLine();
+                System.out.println("Podaj nazwisko sedziego");
+                nazwisko = myObj.nextLine();
+                plaza.usunSedziegoPomocniczego(imie, nazwisko);
                 break;
             default:
                 break;
