@@ -29,28 +29,35 @@ public class Kopakabana implements Serializable {
     public void dodajSedziego(Sedzia s){
         sedziowie.add(s);
     }
-    public void usunSedziego(Sedzia s){
-        if(sedziowie.contains(s)) {
-            sedziowie.remove(s);
-        }else{
-            System.out.println("Nie ma takiego sedziego!");
+    public void usunSedziego(String imie, String nazwisko){
+        for(int i=0;i<sedziowie.size();i++) {
+            if (sedziowie.get(i).toString().equals(imie+" "+nazwisko)) {
+                sedziowie.remove(i);
+            }else if(i==sedziowie.size()-1){
+                System.out.println("Nie ma takiego sedziego!");
+            }
         }
     }
     public void dodajSedziegoPomocniczego(Sedzia_pomocniczy s){
         pomocniczy.add(s);
     }
-    public void usunSedziegoPomocniczego(Sedzia_pomocniczy s){
-        if(pomocniczy.contains(s)) {
-            pomocniczy.remove(s);
-        }else{
-            System.out.println("Nie ma takiego sedziego!");
+    public void usunSedziegoPomocniczego(String imie, String nazwisko){
+        for(int i=0;i<pomocniczy.size();i++) {
+            if (pomocniczy.get(i).toString().equals(imie+" "+nazwisko)) {
+                pomocniczy.remove(i);
+            }else if(i==pomocniczy.size()-1){
+                System.out.println("Nie ma takiego sedziego!");
+            }
         }
     }
     public void wypiszDruzyny(){
         int i=1;
+        if(druzyny.size()!=0){
         for(Druzyna druzyna : druzyny) {
             System.out.println(i + "." + druzyna);
             i++;
+        }}else{
+            System.out.println("Lista druzyn jest pusta!");
         }
     }
 
@@ -63,11 +70,13 @@ public class Kopakabana implements Serializable {
     public void zglosDruzyna(Druzyna d){
         druzyny.add(d);
     }
-    public void wycofajDruzyne(Druzyna d){
-        if(druzyny.contains(d)) {
-            druzyny.remove(d);
-        }else{
-            System.out.println("Nie ma takiej druzyny!");
+    public void wycofajDruzyne(String nazwa){
+        for(int i=0;i<druzyny.size();i++) {
+            if (druzyny.get(i).toString().equals(nazwa)) {
+                druzyny.remove(i);
+            }else if(i==druzyny.size()-1){
+                System.out.println("Nie ma takiej druzyny!");
+            }
         }
     }
     public void wypiszSedziow(){
