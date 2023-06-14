@@ -27,7 +27,21 @@ public class Kopakabana implements Serializable {
         }
     }
     public void dodajSedziego(Sedzia s){
-        sedziowie.add(s);
+
+        if(sedziowie.size()==0){
+            sedziowie.add(s);
+        }else{
+            int istnieje = 0;
+            for(int i=0;i<sedziowie.size();i++) {
+                if (sedziowie.get(i).toString().equals(s.toString())) {
+                    istnieje = 1;
+                }
+            }if(istnieje == 0){
+                sedziowie.add(s);
+            }else{
+                System.out.println("Taki sedzia juz istnieje");
+            }
+        }
     }
     public void usunSedziego(String imie, String nazwisko){
         for(int i=0;i<sedziowie.size();i++) {
@@ -39,7 +53,20 @@ public class Kopakabana implements Serializable {
         }
     }
     public void dodajSedziegoPomocniczego(Sedzia_pomocniczy s){
-        pomocniczy.add(s);
+        if(pomocniczy.size()==0){
+            pomocniczy.add(s);
+        }else{
+            int istnieje = 0;
+            for(int i=0;i<pomocniczy.size();i++) {
+                if (pomocniczy.get(i).toString().equals(s.toString())) {
+                    istnieje = 1;
+                }
+            }if(istnieje == 0){
+                pomocniczy.add(s);
+            }else{
+                System.out.println("Taki sedzia juz istnieje!");
+            }
+        }
     }
     public void usunSedziegoPomocniczego(String imie, String nazwisko){
         for(int i=0;i<pomocniczy.size();i++) {
