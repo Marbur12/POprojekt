@@ -15,6 +15,7 @@ abstract class Mecz implements Serializable {
         
     }
     public abstract String rodzajMeczu();
+    //w odpowiednich miejscach, metoda ta jest rozszerzona o wypisywanie typu danego meczu
     public void wynik(){
         try{
             System.out.println("Prosze podaj wyniki: (jesli byl remis, podaj wyniki dogrywki)\nWynik 1:");
