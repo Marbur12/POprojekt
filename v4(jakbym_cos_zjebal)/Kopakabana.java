@@ -21,7 +21,12 @@ public class Kopakabana implements Serializable {
     }
     //ponizsza funkcja pomaga sortowac druzyny wedlug najwiekszej liczby zwyciestw
     public void sortowanie(){
-        druzyny.sort(new porownanieWynikow());
+        druzyny.sort(new Comparator<Druzyna>() {
+            @Override
+            public int compare(Druzyna o1, Druzyna o2) {
+                return 0;
+            }
+        });
         for(Druzyna druzyna : druzyny){
             System.out.println(druzyna.toString()+":"+druzyna.getZwyciestwa());
         }
