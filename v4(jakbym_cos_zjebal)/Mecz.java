@@ -12,10 +12,9 @@ abstract class Mecz implements Serializable {
         druzyna0=d0;
         druzyna1=d1;
         sedzia = s;
-        //jesli jakies errory z sedzia to moze przez to
+        
     }
     public abstract String rodzajMeczu();
-    //tutaj opcja od meczy
     public void wynik(){
         try{
             System.out.println("Prosze podaj wyniki: (jesli byl remis, podaj wyniki dogrywki)\nWynik 1:");
@@ -31,8 +30,8 @@ abstract class Mecz implements Serializable {
             String nazwisko = myObj.nextLine();
             sedzia=new Sedzia(imie, nazwisko);*/
                 //czyRozegrany=true;
-                //gopnik: dodalem prosta obsluge bledow, jesli uznasz ze trzeba jakos ladniej to zrobic to moge sie tym zajac
-                //ale na te chwile imo to wystaraczajace, przy okazji zmienna czyRozegrany idzie do wyjebania chyba
+                //dodano prosta obsluge bledow, lepiej byloby zamienic ja na zwykle ify lub while
+                //ale w razie czego mozna to tez tak zachowac
             if (wynik1 < 0) {
                     throw new wynikException("Ujemny wynik!", wynik1);
                 }
@@ -55,8 +54,6 @@ abstract class Mecz implements Serializable {
             System.exit(1);
         }
     }
-    //gopnik: na moje mozna wyjebac ponizsze metody bo nie sa uzywane
-    //wiec jak tez jestes takiego zdania to mozna kasowac
     public void modZwyciezca(int z){
         zwyciezca = z;
     }
