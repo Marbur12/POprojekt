@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
-//gopnik: tego oto uzylem do zrobienia posortowanej tablicy wedllug wynikow
 
 public class Kopakabana implements Serializable {
     private final ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
