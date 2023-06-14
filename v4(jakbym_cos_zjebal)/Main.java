@@ -5,10 +5,8 @@ import java.util.*;
 import java.util.InputMismatchException;
 
 public class Main{
-    /*funkcja odpowiada za wyswietlenie zarzadzania konkretnymi listami, case1 to zarzadzanie druzynami, case2 sedziami itp
-    na podstawie wczesniej podanej liczby
-    uwzglednilem rowniez wypisywanie druzyn, sedziow aby mozna bylo latwiej podjac decyzje o dodaniu ew usunieciu
-    */
+    //ponizsze funkcje pobieraja nazwy druzyn/sedziow, powstaly po to aby
+    //zmniejszyc ilosc kodu
     static Druzyna NazwaDruzyny(Kopakabana plaza){
         System.out.println("Podaj nazwe druzyny!");
         Scanner myObj = new Scanner(System.in);
@@ -32,7 +30,7 @@ public class Main{
         Sedzia_pomocniczy sedzia = new Sedzia_pomocniczy(imie, nazwisko);
         return sedzia;
     }
-    
+    //natomiast kolejne funkcje odpowiadaja jedynie za wypisywanie tekstu
     static void wypiszopcjeSedziego(){
         System.out.println("Wybierz co chcesz zrobic");
         System.out.println("1.Dodaj sedziego");
@@ -64,8 +62,11 @@ public class Main{
         System.out.println("5-Zapisz stan turnieju");
         System.out.println("6-Wyjdz");
     }
-    //gopnik: lekki refactoring?
     
+    /*funkcja odpowiada za wyswietlenie zarzadzania konkretnymi listami, case1 to zarzadzanie druzynami, case2 sedziami itp
+    na podstawie wczesniej podanej liczby
+    uwzgledniono rowniez wypisywanie druzyn, sedziow aby mozna bylo latwiej podjac decyzje o dodaniu ew usunieciu
+    */
     static void wyborGlowny(int chose, Kopakabana plaza){
         int i;
         switch (chose){
@@ -105,10 +106,8 @@ public class Main{
                     wybor_uzytkownika = myObj.nextInt();
                 }while(wybor_uzytkownika!=4);
                 break;
-                //tutaj powinna byc funkcja odpowiadajaca za stworzenie jednego z trzech meczy
             case 4:
                 try {
-                    //gopnik: lapanie wyjatku oraz funkcja z sortowaniem
                     if(plaza.rozmiarDruzyn()<1){
                         throw new ZlaObsluga("nie podales jeszcze druzyn!");
                     }
@@ -156,7 +155,7 @@ public class Main{
         }
         }
     
-    //funkcja wyborDruzyna odpowiada, za zgloszenie lub wycofanie druzyny, przy czym wykorzystalem
+    //funkcja wyborDruzyna odpowiada, za zgloszenie lub wycofanie druzyny, przy czym wykorzystano
     //wczesniej opisana funkcje nazwaDruzyny aby skrocic kod
     static void wyborDruzyna(int chose, Kopakabana plaza){
         switch(chose){
@@ -199,6 +198,7 @@ public class Main{
         }
          wypiszopcjeSedziego();
     }
+    //w funkcji wyborMecze odbywa sie zarzadzanie etapamia turnieju, takimi jak finaly, polfinaly...
     static void wyborMecze(int chose, Kopakabana plaza1){
         switch(chose){
             case 1:
@@ -208,13 +208,11 @@ public class Main{
                         throw new ZlaObsluga("zla malo druzyn");
                     }
                         plaza1.generujMecze();
-                    //gopnik: w nastepnych linijkach wykorzystalem nowo napisane funkcje, jesli beda nowe bledy to najpewniej z tego powodu
+                    //tutaj mozna zaobserwowac wypisywanie typu meczu
                     for (int i = 0; i < plaza1.rozmiarMeczy(); i++) {
                         String typMeczu = "";
                         typMeczu = plaza1.zwrocMecz(i).rodzajMeczu();
                         System.out.println(i + ". Mecz:" + typMeczu + " " + plaza1.zwrocMecz(i).druzyna0 + " vs " + plaza1.zwrocMecz(i).druzyna1);
-                        //gopnik: imo tutaj mozna dodac proszenie o wyniki meczy a sedziow rowniez jako tako mozna losowac
-                        //gopnik: zmienie nieco strukture metody wynik w klasie mecz
                         plaza1.zwrocMecz(i).wynik();
                     }
                     for (int i = 0; i < plaza1.rozmiarDruzyn(); i++) {
@@ -228,6 +226,7 @@ public class Main{
                 }
                 break;
             case 2:
+                //zaimplementowane zostaly odpowiednie warunki, tak aby turniej odpowiednio funkcjonowal
                 if(plaza1.rozmiarDruzyn()>=4){
                  if(plaza1.rozmiarPolfinaly()==0){
                     plaza1.generujPolfinaly();
@@ -245,6 +244,7 @@ public class Main{
                 }
                     break;
                 case 3:
+                    
                     if(plaza1.rozmiarPolfinaly()!=0 && plaza1.rozmiarFinaly()==0) {
                         plaza1.generujFinaly();
                         System.out.println("Finaly!!!!!!");
@@ -332,17 +332,15 @@ public class Main{
         //test
         /*
         Kopakabana plaza = new Kopakabana();
-        plaza.zglosDruzyna(new Druzyna("Patrysie"));
-        plaza.zglosDruzyna(new Druzyna("Chuje"));
-        plaza.zglosDruzyna(new Druzyna("Debile"));
-        plaza.zglosDruzyna(new Druzyna("Cioty"));
-        plaza.zglosDruzyna(new Druzyna("Farfocle"));
-        plaza.dodajSedziego(new Sedzia("Tfuj", "Stary"));
-        plaza.dodajSedziegoPomocniczego(new Sedzia_pomocniczy("Jest","Jebanmy"));
+        plaza.zglosDruzyna(new Druzyna("Tygrysy"));
+        plaza.zglosDruzyna(new Druzyna("Pantery"));
+        plaza.zglosDruzyna(new Druzyna("Goryle"));
+        plaza.zglosDruzyna(new Druzyna("Rekiny"));
+        plaza.zglosDruzyna(new Druzyna("Kokosy"));
+        plaza.dodajSedziego(new Sedzia("Andrzej", "Palma"));
+        plaza.dodajSedziegoPomocniczego(new Sedzia_pomocniczy("Jest","jest"));
         plaza.dodajSedziegoPomocniczego(new Sedzia_pomocniczy("Jest","jkasfd"));
-        Serializuj(plaza, "hui");
-        //gopnik: w nastepnych linijkach wykorzystalem nowo napisane funkcje, jesli beda nowe bledy to najpewniej z tego powodu
-       //gopnik: przenioslem te generacje meczy i polfinalow do wyborMecze
+        Serializuj(plaza, "plaza");
         */
         //end test
         //concluding działa zostawiam gdyby moduł przydał się na przyszłość
@@ -360,18 +358,18 @@ public class Main{
                 plaza = new Kopakabana();
             }
             //Kopakabana plaza = null;
-            //plaza = Deserializuj("hui.ser");
+            //plaza = Deserializuj("plaza.ser");
             wybor=0;
             while(true) {
                 System.out.println(plaza);
                 wypiszMenu();
                 wybor = myObj.nextInt();
                 wyborGlowny(wybor, plaza);
-                //gopnik: funkcja wybor glowny decyduje czy bedziemy zarzadzac druzynami, sedziami czy inne opcje
+                //funkcja wybor glowny decyduje czy bedziemy zarzadzac druzynami, sedziami czy inne opcje
             }
         }catch(InputMismatchException e){
             System.out.println("podaj liczbe!");
         }
-        //gopnik: no kolejny wyjatek
+        //jeden z wyjatkow
     }
 }
