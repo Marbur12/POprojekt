@@ -154,6 +154,7 @@ public class Kopakabana implements Serializable {
     }
     public ArrayList<Mecz> getMeczePolfinaly(){return meczePolfinaly;}
     public ArrayList<Mecz> getMeczeFinaly(){return meczeFinaly;}
+    public ArrayList<Druzyna> getDruzynyFinaly(){return  druzynyFinaly;}
     public void generujMecze(){
         //generuje mecze z wszystkimi druzynami
         //returnuje liste wszytskich meczy
@@ -272,19 +273,18 @@ public class Kopakabana implements Serializable {
             druzynyFinaly.add(new Druzyna(druzynyPolfinaly.get(i)));
             druzynyFinaly.get(i).setZwyciestwa(0);
         }
-        for (int i=0; i<2; i++){
-                int rand1, rand2, rand3;
-                rand1 = getRandomNumber(0, pomocniczy.size() - 1);
-                if (rand1==0)
-                    rand2 = 1;
-                else
-                   rand2=rand1-1; 
-                rand3 = getRandomNumber(0,sedziowie.size()-1);
-                meczeFinaly.add(new Mecz2ogni(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3)));
-                rand3 = getRandomNumber(0,sedziowie.size()-1);
-                meczeFinaly.add(new PrzeciaganieLiny(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3)));
-                rand3 = getRandomNumber(0,sedziowie.size()-1);
-                meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3),  pomocniczy.get(rand1), pomocniczy.get(rand2)));
-            }
+
+        int rand1, rand2, rand3;
+        rand1 = getRandomNumber(0, pomocniczy.size() - 1);
+        if (rand1 == 0)
+            rand2 = 1;
+        else
+            rand2 = rand1 - 1;
+            rand3 = getRandomNumber(0, sedziowie.size() - 1);
+            meczeFinaly.add(new Mecz2ogni(druzynyFinaly.get(0), druzynyFinaly.get(1), sedziowie.get(rand3)));
+            rand3 = getRandomNumber(0, sedziowie.size() - 1);
+            meczeFinaly.add(new PrzeciaganieLiny(druzynyFinaly.get(0), druzynyFinaly.get(1), sedziowie.get(rand3)));
+            rand3 = getRandomNumber(0, sedziowie.size() - 1);
+            meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(0), druzynyFinaly.get(1), sedziowie.get(rand3), pomocniczy.get(rand1), pomocniczy.get(rand2)));
+        }
     }
-}

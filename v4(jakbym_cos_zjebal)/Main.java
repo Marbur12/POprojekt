@@ -263,7 +263,16 @@ public class Main{
                             typMeczu = plaza1.zwrocMecz(i).rodzajMeczu();
                             System.out.println(i + ". Mecz:" + typMeczu + " " + plaza1.getMeczeFinaly().get(i).druzyna0 + " vs " + plaza1.getMeczeFinaly().get(i).druzyna1);
                             plaza1.getMeczeFinaly().get(i).wynik();
+
                         }
+                        Druzyna winner=null;
+                        if (plaza1.getDruzynyFinaly().get(0).getZwyciestwa()>1){
+                            winner = plaza1.getDruzynyFinaly().get(0);
+                        }
+                        else{
+                            winner = plaza1.getDruzynyFinaly().get(1);
+                        }
+                        System.out.println("Turniej Kopakabana zwyciężyła drużyna:"+winner);
                     }else{
                         System.out.println("Najpierw rozegraj polfinaly!");
                     }
