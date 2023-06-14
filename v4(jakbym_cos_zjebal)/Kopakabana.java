@@ -24,7 +24,7 @@ public class Kopakabana implements Serializable {
         druzyny.sort(new Comparator<Druzyna>() {
             @Override
             public int compare(Druzyna o1, Druzyna o2) {
-                return 0;
+                return o2.getZwyciestwa() - o1.getZwyciestwa();
             }
         });
         for(Druzyna druzyna : druzyny){

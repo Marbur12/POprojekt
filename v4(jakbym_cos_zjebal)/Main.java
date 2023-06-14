@@ -254,7 +254,6 @@ public class Main{
                 }
                     break;
                 case 3:
-                    
                     if(plaza1.rozmiarPolfinaly()!=0 && plaza1.rozmiarFinaly()==0) {
                         plaza1.generujFinaly();
                         System.out.println("Finaly!!!!!!");
@@ -348,21 +347,6 @@ public class Main{
 
     public static void main(String[] args) {
         try{
-        //test
-        /*
-        Kopakabana plaza = new Kopakabana();
-        plaza.zglosDruzyna(new Druzyna("Tygrysy"));
-        plaza.zglosDruzyna(new Druzyna("Pantery"));
-        plaza.zglosDruzyna(new Druzyna("Goryle"));
-        plaza.zglosDruzyna(new Druzyna("Rekiny"));
-        plaza.zglosDruzyna(new Druzyna("Kokosy"));
-        plaza.dodajSedziego(new Sedzia("Andrzej", "Palma"));
-        plaza.dodajSedziegoPomocniczego(new Sedzia_pomocniczy("Jest","jest"));
-        plaza.dodajSedziegoPomocniczego(new Sedzia_pomocniczy("Jest","jkasfd"));
-        Serializuj(plaza, "plaza");
-        */
-        //end test
-        //concluding działa zostawiam gdyby moduł przydał się na przyszłość
             Kopakabana plaza=null;
             System.out.println("Witaj w zawodach plaży Kopakabana!\n1-Wczytaj wcześniej zapisany stan\n2-Stwórz nowy turniej");
             Scanner myObj = new Scanner(System.in);
