@@ -71,13 +71,15 @@ public class Kopakabana implements Serializable {
         if(druzyny.size()==0){
             druzyny.add(d);
         }else{
-        boolean istnieje = false;
+        int istnieje = 0;
         for(int i=0;i<druzyny.size();i++) {
-            if (druzyny.get(i).toString() == d.toString()) {
-                istnieje = true;
+            if (druzyny.get(i).toString().equals(d.toString())) {
+                istnieje = 1;
             }
-        }if(!istnieje){
+        }if(istnieje == 0){
             druzyny.add(d);
+            }else{
+            System.out.println("Taka druzyna juz istnieje");
             }
         }
     }
