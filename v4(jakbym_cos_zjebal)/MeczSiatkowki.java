@@ -12,23 +12,7 @@ public final class MeczSiatkowki extends Mecz implements Serializable {
     public String rodzajMeczu(){
         return "Mecz siatkowki";
     }
-    /*
-    public void wynik(int wynik1, int wynik2, Sedzia s, Sedzia_pomocniczy p1, Sedzia_pomocniczy p2){
-        sedzia=new Sedzia(s);
-        pom1=new Sedzia_pomocniczy(pom1);
-        pom2=new Sedzia_pomocniczy(pom2);
-        czyRozegrany=true;
-        if(wynik1>wynik2){
-            druzyna0.wygrana();
-        }
-        if(wynik1<wynik2){
-            druzyna1.wygrana();
-        }
-        if(wynik1==wynik2){
-            System.out.println("Mecz zakonczyl sie remisem!");
-        }
-    }*/
-    //gopnik: imo mozna wyjebac te funkcje? pewnie jeszcze tutaj rzeczy mozna zmienic
+
     public void modSedziPomocniczych(Sedzia_pomocniczy s1, Sedzia_pomocniczy s2){
         pom1 = s1;
         pom2 = s2;
