@@ -1,5 +1,5 @@
 import java.util.Comparator;
-
+//klasa pomagajaca w sortowaniu
 class porownanieWynikow implements Comparator<Druzyna> {
     @Override
     public int compare(Druzyna d1, Druzyna d2){

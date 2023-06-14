@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
-//gopnik: tego oto uzylem do zrobienia posortowanej tablicy wedllug wynikow
 
 public class Kopakabana implements Serializable {
     private final ArrayList<Sedzia> sedziowie = new ArrayList<Sedzia>();
@@ -28,30 +27,64 @@ public class Kopakabana implements Serializable {
         }
     }
     public void dodajSedziego(Sedzia s){
-        sedziowie.add(s);
-    }
-    public void usunSedziego(Sedzia s){
-        if(sedziowie.contains(s)) {
-            sedziowie.remove(s);
+
+        if(sedziowie.size()==0){
+            sedziowie.add(s);
         }else{
-            System.out.println("Nie ma takiego sedziego!");
+            int istnieje = 0;
+            for(int i=0;i<sedziowie.size();i++) {
+                if (sedziowie.get(i).toString().equals(s.toString())) {
+                    istnieje = 1;
+                }
+            }if(istnieje == 0){
+                sedziowie.add(s);
+            }else{
+                System.out.println("Taki sedzia juz istnieje");
+            }
+        }
+    }
+    public void usunSedziego(String imie, String nazwisko){
+        for(int i=0;i<sedziowie.size();i++) {
+            if (sedziowie.get(i).toString().equals(imie+" "+nazwisko)) {
+                sedziowie.remove(i);
+            }else if(i==sedziowie.size()-1){
+                System.out.println("Nie ma takiego sedziego!");
+            }
         }
     }
     public void dodajSedziegoPomocniczego(Sedzia_pomocniczy s){
-        pomocniczy.add(s);
-    }
-    public void usunSedziegoPomocniczego(Sedzia_pomocniczy s){
-        if(pomocniczy.contains(s)) {
-            pomocniczy.remove(s);
+        if(pomocniczy.size()==0){
+            pomocniczy.add(s);
         }else{
-            System.out.println("Nie ma takiego sedziego!");
+            int istnieje = 0;
+            for(int i=0;i<pomocniczy.size();i++) {
+                if (pomocniczy.get(i).toString().equals(s.toString())) {
+                    istnieje = 1;
+                }
+            }if(istnieje == 0){
+                pomocniczy.add(s);
+            }else{
+                System.out.println("Taki sedzia juz istnieje!");
+            }
+        }
+    }
+    public void usunSedziegoPomocniczego(String imie, String nazwisko){
+        for(int i=0;i<pomocniczy.size();i++) {
+            if (pomocniczy.get(i).toString().equals(imie+" "+nazwisko)) {
+                pomocniczy.remove(i);
+            }else if(i==pomocniczy.size()-1){
+                System.out.println("Nie ma takiego sedziego!");
+            }
         }
     }
     public void wypiszDruzyny(){
         int i=1;
+        if(druzyny.size()!=0){
         for(Druzyna druzyna : druzyny) {
             System.out.println(i + "." + druzyna);
             i++;
+        }}else{
+            System.out.println("Lista druzyn jest pusta!");
         }
     }
 
@@ -62,13 +95,28 @@ public class Kopakabana implements Serializable {
         return mecze.get(i);
     }
     public void zglosDruzyna(Druzyna d){
-        druzyny.add(d);
-    }
-    public void wycofajDruzyne(Druzyna d){
-        if(druzyny.contains(d)) {
-            druzyny.remove(d);
+        if(druzyny.size()==0){
+            druzyny.add(d);
         }else{
-            System.out.println("Nie ma takiej druzyny!");
+        int istnieje = 0;
+        for(int i=0;i<druzyny.size();i++) {
+            if (druzyny.get(i).toString().equals(d.toString())) {
+                istnieje = 1;
+            }
+        }if(istnieje == 0){
+            druzyny.add(d);
+            }else{
+            System.out.println("Taka druzyna juz istnieje");
+            }
+        }
+    }
+    public void wycofajDruzyne(String nazwa){
+        for(int i=0;i<druzyny.size();i++) {
+            if (druzyny.get(i).toString().equals(nazwa)) {
+                druzyny.remove(i);
+            }else if(i==druzyny.size()-1){
+                System.out.println("Nie ma takiej druzyny!");
+            }
         }
     }
     public void wypiszSedziow(){

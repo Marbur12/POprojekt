@@ -7,7 +7,6 @@ public final class MeczSiatkowki extends Mecz implements Serializable {
         super(d0,d1,s);
         pom1 = sp1;
         pom2 = sp2;
-        //jesli jakies problemy z sedziami to moze tu?
     }
     public String rodzajMeczu(){
         return "Mecz siatkowki";
@@ -22,6 +21,5 @@ public final class MeczSiatkowki extends Mecz implements Serializable {
         sedziowie_pomoc.add(pom1);
         sedziowie_pomoc.add(pom2);
         return sedziowie_pomoc;
-        //(zjebane)->chyba fixed
     }
 }
