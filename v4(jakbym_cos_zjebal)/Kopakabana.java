@@ -16,11 +16,11 @@ public class Kopakabana implements Serializable {
     private final ArrayList<Mecz> meczePolfinaly = new ArrayList<Mecz>();
     private final ArrayList<Mecz> meczeFinaly = new ArrayList<Mecz>();
     
-    //gopnik: szybkie random number do generowania sedziow
+    //metoda ta pomaga w losowaniu sedziow ktorzy odpowiadaja za dany mecz
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
-    //wspomniane sortowanie
+    //ponizsza funkcja pomaga sortowac druzyny wedlug najwiekszej liczby zwyciestw
     public void sortowanie(){
         druzyny.sort(new porownanieWynikow());
         for(Druzyna druzyna : druzyny){
@@ -37,8 +37,6 @@ public class Kopakabana implements Serializable {
             System.out.println("Nie ma takiego sedziego!");
         }
     }
-    //dodalem do usunSedziego warunek sprawdzajacy czy jest taki sedzia w ogole
-    //na moje mily bajer
     public void dodajSedziegoPomocniczego(Sedzia_pomocniczy s){
         pomocniczy.add(s);
     }
@@ -49,8 +47,6 @@ public class Kopakabana implements Serializable {
             System.out.println("Nie ma takiego sedziego!");
         }
     }
-    //specjalnie pod liste sedziow pomocniczych
-    //od tego momentu do nastepnego komentarza oznaczam funkcje ktore na moje rozwiazuja problem pol private/public
     public void wypiszDruzyny(){
         int i=1;
         for(Druzyna druzyna : druzyny) {
@@ -65,7 +61,6 @@ public class Kopakabana implements Serializable {
     public Mecz zwrocMecz(int i){
         return mecze.get(i);
     }
-    //no to dotad pisalem
     public void zglosDruzyna(Druzyna d){
         druzyny.add(d);
     }
@@ -96,6 +91,7 @@ public class Kopakabana implements Serializable {
             System.out.println("Lista sedziow pomocniczych jest pusta, pomoz ja wypelnic.");
         }
     }
+    //rozmiar listy meczy pozwala okreslic czy rozegrano juz dany etap turnieju
     public int rozmiarPolfinaly(){return meczePolfinaly.size();}
     public int rozmiarFinaly(){return meczeFinaly.size();}
     //sluzy do tego aby sprawdzic czy byly juz rozegrane polfinaly
@@ -112,14 +108,13 @@ public class Kopakabana implements Serializable {
     public ArrayList<Mecz> getMeczeFinaly(){return meczeFinaly;}
     public void generujMecze(){
         //generuje mecze z wszystkimi druzynami
-        //returnuje ci liste wszytskich meczy
-        //w menu pózniej proszisz o wyniki
+        //returnuje liste wszytskich meczy
+        //w menu podaje sie wyniki
         int size = druzyny.size();
             try {
                 if (sedziowie.size() < 1 || pomocniczy.size() < 2) {
                     throw new ZlaObsluga("za malo sedziow!");
                 }
-                //troche sporo tych randow ale no, prowizorka
                 int rand1, rand2, rand3, rand4, rand5;
                 for (int i = 0; i < size - 1; i++) {
                     for (int j = i + 1; j < size; j++) {
@@ -139,11 +134,11 @@ public class Kopakabana implements Serializable {
             }
             
 
-    } //cos trzeba
+    } 
 
     public void generujPolfinaly(){
 
-        //dodaje druzyny z najwieksza liczba zwyciezc do nowej
+        //dodaje druzyny z najwieksza liczba zwyciezstw do nowej
         //listy z ktorej beda tworzone polfinaly
         int liczdruz=0;
         ArrayList<Druzyna> top= new ArrayList<Druzyna>();
@@ -243,7 +238,5 @@ public class Kopakabana implements Serializable {
                 rand3 = getRandomNumber(0,sedziowie.size()-1);
                 meczeFinaly.add(new MeczSiatkowki(druzynyFinaly.get(i), druzynyFinaly.get(3-i), sedziowie.get(rand3),  pomocniczy.get(rand1), pomocniczy.get(rand2)));
             }
-        //tak jak pisalem wyzej w komentarzu, nieco tych randow jest ale co zrobic
-        //MB: kinda better solution tera
     }
 }
